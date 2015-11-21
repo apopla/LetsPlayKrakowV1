@@ -15,13 +15,10 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        initializeDependencies();
-    }
-
-    private void initializeDependencies() {
         KontaktSDK.initialize(this)
                 .setDebugLoggingEnabled(BuildConfig.DEBUG)
                 .setLogLevelEnabled(LogLevel.DEBUG, true)
                 .setCrashlyticsLoggingEnabled(true);
     }
+
 }
