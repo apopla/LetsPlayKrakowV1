@@ -43,7 +43,6 @@ public class AdapterCreator {
         String customerPhotoUrl = "";
 
 
-
         MaterialDrawerAdapter
                 mAdapter = new MaterialDrawerAdapter(context, getDataSet(isLoggedIn), "",
                 "", customerPhotoUrl, isLoggedIn);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
@@ -57,10 +56,16 @@ public class AdapterCreator {
                     case 0:
                         FragmentSwitcher.switchToFragment(context, FragmentUnit.START, R.id.activity_main_fragment_placeholder, null);
                         break;
+                    case 2:
+                        FragmentSwitcher.switchToFragment(context, FragmentUnit.MAP,
+                                R.id.activity_main_fragment_placeholder, null);
+                        break;
+
                     default:
                     case 1:
                         FragmentSwitcher.switchToFragment(context, FragmentUnit.SETTINGS, R.id.activity_main_fragment_placeholder, null);
                         break;
+
                 }
                 if (drawer != null)
                     drawer.closeDrawers();

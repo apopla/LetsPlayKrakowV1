@@ -23,7 +23,6 @@ import com.example.kitowcy.letsplaykrakow.FragmentSwitcher;
 import com.example.kitowcy.letsplaykrakow.FragmentUnit;
 import com.example.kitowcy.letsplaykrakow.MaterialDrawerAdapter;
 import com.example.kitowcy.letsplaykrakow.R;
-import com.example.kitowcy.letsplaykrakow.location.LocationRequestBuilder;
 import com.example.kitowcy.letsplaykrakow.location.LocationService;
 
 public class MainActivity extends AppCompatActivity {
@@ -62,20 +61,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupLocationService() {
-        Bundle bundle = new Bundle();
-        LocationRequestBuilder locationRequestBuilder = new LocationRequestBuilder()
-                .withAccuracy(LocationRequestBuilder.BALANCED)
-                .withUpdateInterval(400).withFastestInterval(200);
+        Log.d(TAG, "setupLocationService ");
+        Intent intent = new Intent(getApplicationContext(), LocationService.class);
+        startService(intent);
 
-        bundle.putSerializable("LOCATION_REQUEST_BUILDER", locationRequestBuilder);
-        startServiceWithBundle(bundle);
+//        Bundle bundle = new Bundle();
+//        LocationRequestBuilder locationRequestBuilder = new LocationRequestBuilder()
+//                .withAccuracy(LocationRequestBuilder.BALANCED)
+//                .withUpdateInterval(400).withFastestInterval(200);
+//
+//        bundle.putSerializable("LOCATION_REQUEST_BUILDER", locationRequestBuilder);
+//        startServiceWithBundle(bundle);
     }
 
     public void startServiceWithBundle(Bundle bundle) {
-        Log.d(TAG, "startServiceWithBundle ");
-        Intent intent = new Intent(getApplicationContext(), LocationService.class);
-        intent.putExtras(bundle);
-        startService(intent);
+//        Log.d(TAG, "startServiceWithBundle ");
+//        Intent intent = new Intent(getApplicationContext(), LocationService.class);
+//        intent.putExtras(bundle);
+//        startService(intent);
     }
 
     @Override
