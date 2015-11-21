@@ -92,5 +92,16 @@
     <string name="range_all_beacons">Range all types</string>
     <string name="API_KEY">AIzaSyCW7PH2c50g-17FFiMcPhqqWs1IgWjyY2k</string>
 
+    <string name="monument_category">Monuments</string>
+    <string name="food_category">Food</string>
+    <string name="fun_category">Entertainment</string>
+    <string name="culture_category">Culture</string>
+
+
+
+
+
+
+
     <string name="kontakt_io_api_key">VVnUDFGRWhDDlGwkoOiOjudksaayTLwp</string>
 </resources>
