@@ -1,5 +1,6 @@
 package com.example.kitowcy.letsplaykrakow.entities;
 
+import android.app.ActionBar;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_material);
         setupDrawer();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         showSplashFragment();
@@ -136,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupDrawer() {
         Log.d(TAG, "setupDrawer()");
-        boolean userIsLogged = false;
+
         drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);        // drawer object Assigned to the view
         android.support.v7.widget.RecyclerView recyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
 
@@ -163,6 +164,13 @@ public class MainActivity extends AppCompatActivity {
         }; // drawer Toggle Object Made
         drawer.setDrawerListener(mDrawerToggle); // drawer Listener set to the drawer toggle
         mDrawerToggle.syncState();
+
+        ActionBar actionBar = getActionBar();
+        if (actionBar==null){
+            Log.d(TAG, "action bar is null :(");
+        } else {
+            Log.d(TAG, "action bar is not null!!! :)");
+        }
     }
 
     @Override
