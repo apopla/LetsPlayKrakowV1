@@ -23,13 +23,15 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawer;                                  // Declaring DrawerLayout
     private ActionBarDrawerToggle mDrawerToggle;
     public static int currentFragmentDisplayedId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_material);
-       setupDrawer();
+        setupDrawer();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        FragmentSwitcher.switchToFragment(this, FragmentUnit.START, R.id.activity_main_fragment_placeholder, null);
 //
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
     }
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onPostCreate()");
@@ -47,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.syncState();
 
     }
+
     private void setupDrawer() {
         Log.d(TAG, "setupDrawer()");
         boolean userIsLogged = false;
