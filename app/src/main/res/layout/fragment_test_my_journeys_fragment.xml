@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/test_my_journeys_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" />
+
+
+        <RelativeLayout
+            android:id="@+id/test_my_journeys_progress_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#99E1F5FE"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/progress_bar"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="20dp"
+                android:text="Please wait..."
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#2d3132" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+
+        </RelativeLayout>
+
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/test_my_journeys_coordinator_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.design.widget.CoordinatorLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

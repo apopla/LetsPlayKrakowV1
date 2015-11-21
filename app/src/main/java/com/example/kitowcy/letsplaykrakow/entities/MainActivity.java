@@ -1,7 +1,12 @@
-package com.example.kitowcy.letsplaykrakow;
+package com.example.kitowcy.letsplaykrakow.entities;
 
+import android.app.ActivityManager;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Messenger;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,11 +18,30 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.kitowcy.letsplaykrakow.AdapterCreator;
+import com.example.kitowcy.letsplaykrakow.FragmentSwitcher;
+import com.example.kitowcy.letsplaykrakow.FragmentUnit;
+import com.example.kitowcy.letsplaykrakow.MaterialDrawerAdapter;
+import com.example.kitowcy.letsplaykrakow.R;
+import com.example.kitowcy.letsplaykrakow.location.LocationRequestBuilder;
+import com.example.kitowcy.letsplaykrakow.location.LocationService;
+
 public class MainActivity extends AppCompatActivity {
+    private static MainActivity instance;
+
+    public static MainActivity getInstance() {
+        return instance;
+    }
+
     public DrawerLayout getDrawer() {
         return drawer;
     }
 
+
+
+    private ServiceConnection serviceConnection;
+
+    private Messenger serviceMessenger;
     public static final String TAG = MainActivity.class.getSimpleName();
     private Toolbar toolbar;                              // Declaring the Toolbar Object
     private DrawerLayout drawer;                                  // Declaring DrawerLayout
@@ -27,20 +51,36 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        instance = this;
         setContentView(R.layout.activity_main_material);
         setupDrawer();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FragmentSwitcher.switchToFragment(this, FragmentUnit.START, R.id.activity_main_fragment_placeholder, null);
-//
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        FragmentSwitcher.switchToFragment(this, FragmentUnit.MAP, R.id.activity_main_fragment_placeholder, null);
+
+        setupLocationService();
+    }
+
+    private void setupLocationService() {
+        Bundle bundle = new Bundle();
+        LocationRequestBuilder locationRequestBuilder = new LocationRequestBuilder()
+                .withAccuracy(LocationRequestBuilder.BALANCED)
+                .withUpdateInterval(400).withFastestInterval(200);
+
+        bundle.putSerializable("LOCATION_REQUEST_BUILDER", locationRequestBuilder);
+        startServiceWithBundle(bundle);
+    }
+
+    public void startServiceWithBundle(Bundle bundle) {
+        Log.d(TAG, "startServiceWithBundle ");
+        Intent intent = new Intent(getApplicationContext(), LocationService.class);
+        intent.putExtras(bundle);
+        startService(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -49,6 +89,26 @@ public class MainActivity extends AppCompatActivity {
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy ");
+        LocationService.stop();
+    }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        boolean isRunning = false;
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                isRunning = true;
+                break;
+            }
+        }
+        Log.d(TAG, "isMyServiceRunning " + isRunning);
+        return isRunning;
     }
 
     private void setupDrawer() {
@@ -108,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

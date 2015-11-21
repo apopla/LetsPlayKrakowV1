@@ -8,6 +8,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.example.kitowcy.letsplaykrakow.entities.MainActivity;
+
 /**
  * Created by Lukasz Marczak on 2015-08-28.
  * Here we put all common methods to switch to another fragment from parent activity

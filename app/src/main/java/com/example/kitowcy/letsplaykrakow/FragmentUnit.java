@@ -2,16 +2,16 @@ package com.example.kitowcy.letsplaykrakow;
 
 import android.support.v4.app.Fragment;
 
+import com.example.kitowcy.letsplaykrakow.entities.fragments.GoogleMapFragment;
+import com.example.kitowcy.letsplaykrakow.entities.fragments.StartFragment;
 
-/**
- *
- * Created by Arek Biela on 2015-09-04.
- */
+
 public enum FragmentUnit {
 
-    START (0, StartFragment.class),
-    SETTINGS (1, StartFragment.class),
-    BADGES(2, StartFragment.class);
+    MAP(0, GoogleMapFragment.class),
+    START(1, StartFragment.class),
+    SETTINGS(2, StartFragment.class),
+    BADGES(3, StartFragment.class);
 
     /**
      * Subclass of base Fragment class

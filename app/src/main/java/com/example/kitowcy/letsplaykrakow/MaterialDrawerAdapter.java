@@ -44,7 +44,7 @@ public class MaterialDrawerAdapter extends RecyclerView.Adapter<MaterialDrawerAd
     private static final int TYPE_ITEM = 1;    // IF the view under inflation and population is header or Item
 
     private AppCompatActivity context;
-    private List<String> navigationTitles; // String Array to store the passed titles Value from MainActivity.java
+    private List<String> navigationTitles; // String Array to store the passed titles Value from mejnActivity
     private String name;        //String Resource for header View Name
     private String profileImageUrl;      //int Resource for header view profileImageUrl picture
     private String email;       //String Resource for header view email
