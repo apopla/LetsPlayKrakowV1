@@ -39,12 +39,22 @@
             android:name=".entities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
+        <!-- Beacon sevices + API Key -->
+        <service android:name=".beacon.KontaktBeaconService" android:exported="false"/>
+        <service android:name="com.kontakt.sdk.android.ble.service.ProximityService" android:exported="false"/>
+
+        <meta-data
+            android:name="kontakt.io.API_KEY"
+            android:value="@string/kontakt_io_api_key" />
 
     </application>
 
