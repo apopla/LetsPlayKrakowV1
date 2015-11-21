@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         android.support.v7.widget.RecyclerView recyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
 
         recyclerView.setHasFixedSize(true);// Letting the system know that the list objects are of fixed size
-        MaterialDrawerAdapter drawerAdapter = AdapterCreator.getAdapter(drawer, userIsLogged, this);
+        MaterialDrawerAdapter drawerAdapter = AdapterCreator.getAdapter(drawer, this);
         recyclerView.setAdapter(drawerAdapter);                              // Setting the adapter to RecyclerView
 
         //update sth on start
