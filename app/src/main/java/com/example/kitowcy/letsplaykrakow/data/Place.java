@@ -18,6 +18,15 @@ public class Place extends RealmObject {
     private String address;
     private String image;
     private boolean letsPlayKrakow;
+    private String beaconName;
+
+    public String getBeaconName() {
+        return beaconName;
+    }
+
+    public void setBeaconName(String beaconName) {
+        this.beaconName = beaconName;
+    }
 
     public Place() {
     }
