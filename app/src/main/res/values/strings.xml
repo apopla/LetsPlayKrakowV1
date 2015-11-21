@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">LetsPlayKrakow</string>
     <string name="action_settings">Settings</string>
+    <string name="open_drawer">open drawer</string>
+    <string name="close_drawer">close drawer</string>
+    <string name="title_activity_login">LoginActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>
