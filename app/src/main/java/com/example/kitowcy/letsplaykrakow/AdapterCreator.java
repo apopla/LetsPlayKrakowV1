@@ -57,7 +57,7 @@ public class AdapterCreator {
     }
 
     private static void switchTo(AppCompatActivity context, FragmentUnit fragmentUnit) {
-        FragmentSwitcher.switchToFragment(context, FragmentUnit.ACHIEVEMENTS, R.id.activity_main_fragment_placeholder, null);
+        FragmentSwitcher.switchToFragment(context, fragmentUnit, R.id.activity_main_fragment_placeholder, null);
     }
 
 }
