@@ -16,7 +16,7 @@ public class Place extends RealmObject {
     private String category;
     private String description;
     private String address;
-    private String image;
+    private int imageResourceId;
     private boolean letsPlayKrakow;
     private String beaconName;
 
@@ -87,12 +87,12 @@ public class Place extends RealmObject {
         this.address = address;
     }
 
-    public String getImage() {
-        return image;
+    public int getImageResourceId() {
+        return imageResourceId;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageResourceId(int imageResourceId) {
+        this.imageResourceId = imageResourceId;
     }
 
     public boolean isLetsPlayKrakow() {
