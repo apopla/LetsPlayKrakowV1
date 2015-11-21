@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Messenger;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -23,6 +25,7 @@ import com.example.kitowcy.letsplaykrakow.FragmentSwitcher;
 import com.example.kitowcy.letsplaykrakow.FragmentUnit;
 import com.example.kitowcy.letsplaykrakow.MaterialDrawerAdapter;
 import com.example.kitowcy.letsplaykrakow.R;
+import com.example.kitowcy.letsplaykrakow.location.LocationRequestBuilder;
 import com.example.kitowcy.letsplaykrakow.location.LocationService;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
     public DrawerLayout getDrawer() {
         return drawer;
     }
-
-
 
     private ServiceConnection serviceConnection;
 
@@ -51,34 +52,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         instance = this;
+
         setContentView(R.layout.activity_main_material);
         setupDrawer();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FragmentSwitcher.switchToFragment(this, FragmentUnit.MAP, R.id.activity_main_fragment_placeholder, null);
+
+        showSplashFragment();
 
         setupLocationService();
     }
 
     private void setupLocationService() {
-        Log.d(TAG, "setupLocationService ");
-        Intent intent = new Intent(getApplicationContext(), LocationService.class);
-        startService(intent);
+        Bundle bundle = new Bundle();
+        LocationRequestBuilder locationRequestBuilder = new LocationRequestBuilder()
+                .withAccuracy(LocationRequestBuilder.BALANCED)
+                .withUpdateInterval(400).withFastestInterval(200);
 
-//        Bundle bundle = new Bundle();
-//        LocationRequestBuilder locationRequestBuilder = new LocationRequestBuilder()
-//                .withAccuracy(LocationRequestBuilder.BALANCED)
-//                .withUpdateInterval(400).withFastestInterval(200);
-//
-//        bundle.putSerializable("LOCATION_REQUEST_BUILDER", locationRequestBuilder);
-//        startServiceWithBundle(bundle);
+        bundle.putSerializable("LOCATION_REQUEST_BUILDER", locationRequestBuilder);
+        startServiceWithBundle(bundle);
     }
 
     public void startServiceWithBundle(Bundle bundle) {
-//        Log.d(TAG, "startServiceWithBundle ");
-//        Intent intent = new Intent(getApplicationContext(), LocationService.class);
-//        intent.putExtras(bundle);
-//        startService(intent);
+        Log.d(TAG, "startServiceWithBundle ");
+        Intent intent = new Intent(getApplicationContext(), LocationService.class);
+        intent.putExtras(bundle);
+        startService(intent);
     }
 
     @Override
@@ -99,6 +99,26 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         Log.d(TAG, "onDestroy ");
         LocationService.stop();
+    }
+
+    private void showSplashFragment(){
+        FragmentSwitcher.switchToFragment(this, FragmentUnit.SPLASH, R.id.activity_main_fragment_placeholder, null);
+
+        Handler handler = new Handler();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showMapFragment();
+            }
+        }, 2000);
+
+    }
+
+    private void showMapFragment(){
+
+        FragmentSwitcher.switchToFragment(this, FragmentUnit.MAP, R.id.activity_main_fragment_placeholder, null);
+
     }
 
     private boolean isMyServiceRunning(Class<?> serviceClass) {

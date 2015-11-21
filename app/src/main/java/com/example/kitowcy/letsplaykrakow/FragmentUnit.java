@@ -9,7 +9,7 @@ import com.example.kitowcy.letsplaykrakow.entities.fragments.StartFragment;
 
 public enum FragmentUnit {
 
-    SPLASH(-1, GoogleMapFragment.class),
+    SPLASH(-1, StartFragment.class),
     MAP(0, GoogleMapFragment.class),
     ROUTES(1, StartFragment.class),
     ACHIEVEMENTS(2, StartFragment.class),
