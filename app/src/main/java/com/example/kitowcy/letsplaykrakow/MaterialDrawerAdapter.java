@@ -1,23 +1,15 @@
 package com.example.kitowcy.letsplaykrakow;
 
-import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class MaterialDrawerAdapter extends RecyclerView.Adapter<MaterialDrawerAdapter.ViewHolder> {
@@ -51,6 +43,7 @@ public class MaterialDrawerAdapter extends RecyclerView.Adapter<MaterialDrawerAd
 
         RelativeLayout parent;
         TextView textView;
+        ImageView menuImage;
 
         /**
          * @param itemView
@@ -61,7 +54,7 @@ public class MaterialDrawerAdapter extends RecyclerView.Adapter<MaterialDrawerAd
 
             if (ViewType == TYPE_ITEM) {
                 textView = (TextView) itemView.findViewById(R.id.rowText); // Creating TextView object with the id of textView from item_row.xml
-//                imageView = (ImageView) itemView.findViewById(R.id.rowIcon);// Creating ImageView object with the id of ImageView from item_row.xml
+                menuImage = (ImageView) itemView.findViewById(R.id.image_menu_icon);// Creating ImageView object with the id of ImageView from item_row.xml
                 parent = (RelativeLayout) itemView.findViewById(R.id.parent);
                 Holderid = 1;                                               // setting holder id as 1 as the object being populated are of type item row
             } else {
@@ -96,7 +89,7 @@ public class MaterialDrawerAdapter extends RecyclerView.Adapter<MaterialDrawerAd
 
         } else if (viewType == TYPE_HEADER) {
 
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_main_material_header_user_not_logged, parent, false); //Inflating the layout
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_main_material_header, parent, false); //Inflating the layout
 
             ViewHolder vhHeader = new ViewHolder(v, viewType); //Creating ViewHolder and passing the object of type view
             return vhHeader; //returning the object created
@@ -114,7 +107,22 @@ public class MaterialDrawerAdapter extends RecyclerView.Adapter<MaterialDrawerAd
             // position by 1 and pass it to the holder while setting the text and image
             holder.textView.setText(navigationTitles.get(position - 1)); // Setting the Text with the array of our Titles
 //            holder.imageView.setImageResource(mIcons[position - 1]);// Settimg the image with array of our icons
-
+            int image;
+            switch (position - 1){
+                case 0:
+                    image = R.drawable.menu_map;
+                    break;
+                case 1:
+                    image = R.drawable.menu_routes;
+                    break;
+                case 2:
+                    image = R.drawable.menu_places;
+                    break;
+                default:
+                    image = R.drawable.menu_achievement;
+                    break;
+            }
+            holder.menuImage.setImageResource(image);
             if (selectedPos == position) {
                 holder.textView.setTextColor(context.getResources().getColor(R.color.colorPrimary));
             } else {

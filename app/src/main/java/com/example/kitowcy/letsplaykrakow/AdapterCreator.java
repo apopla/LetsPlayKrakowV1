@@ -16,11 +16,10 @@ public class AdapterCreator {
 
     private static List<String> getDataSet() {
         List<String> titles = new ArrayList<>();
-        titles.add("Journeys");
-        titles.add("Offers");
-        titles.add("Timetable");
-        titles.add("Information");
-        titles.add("Settings");
+        titles.add("Map");
+        titles.add("Routes");
+        titles.add("Places");
+        titles.add("Achievements");
 
         return titles;
     }
