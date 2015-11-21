@@ -55,27 +55,12 @@ public class AdapterCreator {
                  */
                 switch (position) {
                     case 0:
-                        FragmentSwitcher.switchToFragment(context, FragmentUnit.JOURNEYS, R.id.activity_main_fragment_placeholder, null);
+                        FragmentSwitcher.switchToFragment(context, FragmentUnit.START, R.id.activity_main_fragment_placeholder, null);
                         break;
+                    default:
                     case 1:
-                        FragmentSwitcher.switchToFragment(context, FragmentUnit.OFFERS, R.id.activity_main_fragment_placeholder, null);
-                        break;
-                    case 2:
-                        FragmentSwitcher.switchToFragment(context, FragmentUnit.TIMETABLE, R.id.activity_main_fragment_placeholder, null);
-                        break;
-                    case 3:
-                        FragmentSwitcher.switchToFragment(context, FragmentUnit.INFORMATION, R.id.activity_main_fragment_placeholder, null);
-                        break;
-                    case 4:
-                        if (!isLoggedIn)
-                            FragmentSwitcher.switchToFragment(context, FragmentUnit.SETTINGS, R.id.activity_main_fragment_placeholder, null);
-                        else
-                            FragmentSwitcher.switchToFragment(context, FragmentUnit.NOTIFICATIONS, R.id.activity_main_fragment_placeholder, null);
-                        break;
-                    case 5: //unreachable statement for not logged user
                         FragmentSwitcher.switchToFragment(context, FragmentUnit.SETTINGS, R.id.activity_main_fragment_placeholder, null);
                         break;
-
                 }
                 if (drawer != null)
                     drawer.closeDrawers();

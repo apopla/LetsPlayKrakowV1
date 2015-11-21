@@ -2,6 +2,8 @@ package com.example.kitowcy.letsplaykrakow;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 /**
@@ -204,7 +208,7 @@ public class MaterialDrawerAdapter extends RecyclerView.Adapter<MaterialDrawerAd
                 holder.profileLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        FragmentSwitcher.switchToFragment(context, FragmentUnit.PROFILE, R.id.activity_main_fragment_placeholder, null);
+                        FragmentSwitcher.switchToFragment(context, FragmentUnit.SETTINGS, R.id.activity_main_fragment_placeholder, null);
                         refreshSelection(-1);
                         if (clickListener != null)
                             clickListener.onItemClicked(-1);
@@ -213,7 +217,7 @@ public class MaterialDrawerAdapter extends RecyclerView.Adapter<MaterialDrawerAd
                 holder.checkOffersLabel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        FragmentSwitcher.switchToFragment(context, FragmentUnit.OFFERS, R.id.activity_main_fragment_placeholder, null);
+                        FragmentSwitcher.switchToFragment(context, FragmentUnit.START, R.id.activity_main_fragment_placeholder, null);
                         refreshSelection(-1);
                         if (clickListener != null)
                             clickListener.onItemClicked(-1);
