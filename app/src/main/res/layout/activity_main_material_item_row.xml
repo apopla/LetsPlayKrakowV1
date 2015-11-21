@@ -9,10 +9,10 @@
 
     <ImageView
         android:id="@+id/image_menu_icon"
-        android:layout_width="10sp"
-        android:layout_height="10sp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_centerVertical="true"
-        android:layout_marginStart="32sp"
+        android:layout_marginStart="32dp"
         android:src="@color/colorAccent" />
 
     <TextView
@@ -26,14 +26,5 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@android:color/black"
         tools:text="Information" />
-
-    <!--<ImageView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="16dp"-->
-        <!--android:layout_marginRight="16dp"-->
-        <!--android:layout_marginTop="40dp"-->
-        <!--android:layerType="software"-->
-        <!--android:src="@drawable/trip_list_divider" />-->
 
 </RelativeLayout>

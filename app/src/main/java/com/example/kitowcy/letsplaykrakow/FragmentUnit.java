@@ -8,10 +8,11 @@ import com.example.kitowcy.letsplaykrakow.entities.fragments.StartFragment;
 
 public enum FragmentUnit {
 
+    SPLASH(-1, GoogleMapFragment.class),
     MAP(0, GoogleMapFragment.class),
-    START(1, StartFragment.class),
-    SETTINGS(2, StartFragment.class),
-    BADGES(3, StartFragment.class);
+    ROUTES(1, StartFragment.class),
+    ACHIEVEMENTS(2, StartFragment.class),
+    PLACES(3, StartFragment.class);
 
     /**
      * Subclass of base Fragment class

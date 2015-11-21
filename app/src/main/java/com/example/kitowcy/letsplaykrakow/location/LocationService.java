@@ -106,7 +106,7 @@ public class LocationService extends Service implements LocationListener,
      * we can launch service with different location update options
      */
     private LocationRequestBuilder locationRequestBuilder = null;
-
+//
     /**
      * Tracks the status of the location updates request. Value changes when the user presses the
      * Start Updates and Stop Updates buttons.
