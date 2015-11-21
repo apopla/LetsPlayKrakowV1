@@ -25,6 +25,7 @@ import com.example.kitowcy.letsplaykrakow.FragmentSwitcher;
 import com.example.kitowcy.letsplaykrakow.FragmentUnit;
 import com.example.kitowcy.letsplaykrakow.MaterialDrawerAdapter;
 import com.example.kitowcy.letsplaykrakow.R;
+import com.example.kitowcy.letsplaykrakow.data.PlaceCreator;
 import com.example.kitowcy.letsplaykrakow.location.LocationRequestBuilder;
 import com.example.kitowcy.letsplaykrakow.location.LocationService;
 
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         instance = this;
+
+        PlaceCreator.load(this);
 
         setContentView(R.layout.activity_main_material);
         setupDrawer();
