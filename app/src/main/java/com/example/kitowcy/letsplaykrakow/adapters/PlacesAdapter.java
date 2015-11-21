@@ -1,0 +1,105 @@
+package com.example.kitowcy.letsplaykrakow.adapters;
+
+import android.content.Context;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.kitowcy.letsplaykrakow.R;
+import com.example.kitowcy.letsplaykrakow.data.Place;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
+
+/**
+ * Created by lukasz on 21.11.15.
+ */
+public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.VH> {
+
+
+    private List<Place> dataSet = new ArrayList<>();
+
+    public PlacesAdapter(Context context, @Nullable final FilterBuilder filterBuilder) {
+        Realm realm = Realm.getInstance(context);
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<Place> results = realm.where(Place.class).findAll();
+                insertToDataSet(results, filterBuilder);
+            }
+        });
+    }
+
+    private void insertToDataSet(RealmResults<Place> results, FilterBuilder builder) {
+        dataSet.clear();
+        for (Place place : results) {
+            if (place.getCategory().equals("CULTURE") && builder.contains(FilterBuilder.CULTURE))
+                dataSet.add(place);
+            if (place.getCategory().equals("FOOD") && builder.contains(FilterBuilder.FOOD))
+                dataSet.add(place);
+            if (place.getCategory().equals("MONUMENTS") && builder.contains(FilterBuilder.MONUMENTS))
+                dataSet.add(place);
+            if (place.getCategory().equals("ENTERTAINMENT") && builder.contains(FilterBuilder.ENTERTAINMENT))
+                dataSet.add(place);
+        }
+        notifyItemRangeChanged(0, getItemCount());
+        notifyDataSetChanged();
+//        if(dataSet.size()==0)
+
+    }
+
+    public void updateDataSet(Context context, final FilterBuilder filterBuilder) {
+        dataSet.clear();
+        Realm realm = Realm.getInstance(context);
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<Place> results = realm.where(Place.class).findAll();
+                insertToDataSet(results, filterBuilder);
+            }
+        });
+    }
+
+    @Override
+    public VH onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.fragment_places_item_row, parent, false);
+        return new VH(view);
+    }
+
+    @Override
+    public void onBindViewHolder(VH viewHolder, int position) {
+        final Place place = dataSet.get(position);
+        viewHolder.letsPlayCracow.setVisibility(place.isLetsPlayKrakow() ? View.VISIBLE : View.GONE);
+        viewHolder.name.setText(place.getName());
+        viewHolder.description.setText(place.getDescription());
+        viewHolder.image.setImageResource(place.getImageResourceId());
+    }
+
+    @Override
+    public int getItemCount() {
+        if (dataSet == null)
+            return 0;
+        return dataSet.size();
+    }
+
+    public static class VH extends RecyclerView.ViewHolder {
+        public TextView name, description;
+        public ImageView image, letsPlayCracow;
+
+        public VH(View itemView) {
+            super(itemView);
+            name = (TextView) itemView.findViewById(R.id.place_name);
+            description = (TextView) itemView.findViewById(R.id.place_description);
+            image = (ImageView) itemView.findViewById(R.id.place_image);
+            letsPlayCracow = (ImageView) itemView.findViewById(R.id.place_play_krakow);
+        }
+    }
+}
