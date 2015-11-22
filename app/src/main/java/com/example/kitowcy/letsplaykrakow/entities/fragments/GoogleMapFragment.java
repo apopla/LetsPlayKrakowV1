@@ -207,17 +207,17 @@ public class GoogleMapFragment extends Fragment {
                             drawMarkers(map);
                         }
                         updateMarker(LocationData.getCurrentPosition());
-                        map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
-                            @Override
-                            public void onMapLongClick(LatLng latLng) {
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        FilterDialogBuilder.buildNotification(getActivity());
-                                    }
-                                }, 5000);
-                            }
-                        });
+//                        map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+//                            @Override
+//                            public void onMapLongClick(LatLng latLng) {
+//                                new Handler().postDelayed(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        FilterDialogBuilder.buildNotification(getActivity());
+//                                    }
+//                                }, 5000);
+//                            }
+//                        });
                     }
                 }
 
