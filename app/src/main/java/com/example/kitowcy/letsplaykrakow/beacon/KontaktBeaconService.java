@@ -224,7 +224,7 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
                 new Intent[] { intent }, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new Notification.Builder(this)
                 .setSmallIcon(R.drawable.bekon)
-                .setContentTitle("You reach " + place.getName() + "!")
+                .setContentTitle("You reached " + place.getName() + "!")
                 .setContentText(place.getDescription())
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)

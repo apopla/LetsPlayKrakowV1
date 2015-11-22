@@ -21,6 +21,8 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
+
 /**
  * Created by Arek on 22.11.2015.
  */
@@ -49,6 +51,13 @@ public class TapPointEventBroadcastReceiver extends BroadcastReceiver {
                         showNotification(context, event);
                     } else if (event.getType().equals(VALID_BEACON_TYPE)) {
                         FilterDialogBuilder.buildNotification(context);
+
+                        Realm realm = Realm.getInstance(context);
+                        Place place = realm.where(Place.class).equalTo("UUID", "Sgwx").findFirst();
+                        realm.beginTransaction();
+                        place.setIsSeen(true);
+                        realm.copyToRealmOrUpdate(place);
+                        realm.commitTransaction();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
