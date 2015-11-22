@@ -25,12 +25,20 @@ import com.example.kitowcy.letsplaykrakow.FragmentSwitcher;
 import com.example.kitowcy.letsplaykrakow.FragmentUnit;
 import com.example.kitowcy.letsplaykrakow.MaterialDrawerAdapter;
 import com.example.kitowcy.letsplaykrakow.R;
+import com.example.kitowcy.letsplaykrakow.TapPointService;
 import com.example.kitowcy.letsplaykrakow.beacon.KontaktBeaconService;
 import com.example.kitowcy.letsplaykrakow.data.PlaceCreator;
 import com.example.kitowcy.letsplaykrakow.entities.fragments.GoogleMapFragment;
 import com.example.kitowcy.letsplaykrakow.entities.fragments.PlacesFragment;
 import com.example.kitowcy.letsplaykrakow.location.LocationRequestBuilder;
 import com.example.kitowcy.letsplaykrakow.location.LocationService;
+import com.google.android.gms.auth.api.Auth;
+import com.proxama.tappoint.auth.AuthListener;
+import com.proxama.tappoint.auth.Authentication;
+import com.proxama.tappoint.error.ApiError;
+import com.proxama.tappoint.sync.SyncListener;
+import com.proxama.tappoint.sync.SyncResult;
+import com.proxama.tappoint.sync.Synchronisation;
 
 public class MainActivity extends AppCompatActivity {
     private static MainActivity instance;
@@ -71,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         showSplashFragment();
         setupLocationService();
         startBeaconService();
+        startTapPointService();
     }
 
     private void setupLocationService() {
@@ -150,6 +159,13 @@ public class MainActivity extends AppCompatActivity {
         startService(intent);
     }
 
+    private void startTapPointService() {
+        Log.d(TAG, "startTapPointService() called with: " + "");
+
+        Intent intent = new Intent(this, TapPointService.class);
+        startService(intent);
+    }
+
     private void setupDrawer() {
         Log.d(TAG, "setupDrawer()");
 
@@ -215,12 +231,13 @@ public class MainActivity extends AppCompatActivity {
             if (currentFragmentDisplayedId == Constants.MAP) {
                 if (GoogleMapFragment.instance != null)
                     GoogleMapFragment.instance.setupFilterDialog();
-            }else if(currentFragmentDisplayedId == Constants.PLACES) {
+            } else if (currentFragmentDisplayedId == Constants.PLACES) {
                 if (PlacesFragment.instance != null)
                     PlacesFragment.instance.setupFilterDialog();
             }
-                return true;
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

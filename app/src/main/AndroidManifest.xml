@@ -53,6 +53,10 @@
         <service
             android:name=".beacon.KontaktBeaconService"
             android:exported="false" />
+
+        <service
+            android:name=".TapPointService"
+            android:exported="false" />
         <service
             android:name="com.kontakt.sdk.android.ble.service.ProximityService"
             android:exported="false" />
@@ -65,6 +69,13 @@
             android:name=".entities.activities.PlaceActivity"
             android:label="@string/title_activity_display_place" >
         </activity>
+
+        <uses-feature
+            android:name="android.hardware.bluetooth_le"
+            android:required="true"/>
+
+        <service android:name="com.proxama.tappointauth.sync.SyncService"/>
+
     </application>
 
 </manifest>

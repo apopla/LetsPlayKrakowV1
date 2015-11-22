@@ -24,6 +24,7 @@ import com.kontakt.sdk.android.ble.filter.ibeacon.IBeaconFilter;
 import com.kontakt.sdk.android.ble.filter.ibeacon.IBeaconFilters;
 import com.kontakt.sdk.android.ble.manager.ProximityManager;
 import com.kontakt.sdk.android.common.profile.IBeaconDevice;
+import com.proxama.tappoint.auth.Authentication;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
