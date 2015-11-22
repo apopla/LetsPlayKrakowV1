@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 
 import com.example.kitowcy.letsplaykrakow.Constants;
 import com.example.kitowcy.letsplaykrakow.R;
+import com.example.kitowcy.letsplaykrakow.data.Place;
 import com.example.kitowcy.letsplaykrakow.location.LocationData;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -26,7 +27,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class GoogleMapFragment extends Fragment {
 
@@ -82,7 +87,7 @@ public class GoogleMapFragment extends Fragment {
             /**
              Receiving location update broadcasts - LocationService
              */
-            if (action.equals(Constants .LOCATION_UPDATE_BROADCAST)) {
+            if (action.equals(Constants.LOCATION_UPDATE_BROADCAST)) {
                 // Get extra data included in the Intent
                 Location location = intent.getParcelableExtra(Constants.LOCATION_UPDATE_KEY);
                 Log.d("locationUpdateReceiver", "Got new location! ");
@@ -131,6 +136,7 @@ public class GoogleMapFragment extends Fragment {
     }
 
     private void showProgressBar(boolean show) {
+        Log.d(TAG, "showProgressBar " + show);
     }
 
     public void setupMap() {
@@ -146,10 +152,30 @@ public class GoogleMapFragment extends Fragment {
 
                 LocalBroadcastManager.getInstance(getActivity()).registerReceiver(locationUpdateReceiver,
                         new IntentFilter(Constants.LOCATION_UPDATE_BROADCAST));
+                drawMarkers(map);
                 updateMarker(LocationData.getCurrentPosition());
             }
         });
         showProgressBar(false);
+    }
+
+    private void drawMarkers(GoogleMap map) {
+        Realm realm = Realm.getInstance(getActivity());
+        RealmResults<Place> places = realm.where(Place.class).findAll();
+        if (places != null) {
+         map.clear();
+
+            for (Place place : places) {
+                Log.d(TAG, "draw new Marker: " + place.getName());
+                Marker m =
+                        map.addMarker(new MarkerOptions()
+                                .position(new LatLng(place.getLatitude(), place.getLongitude()))
+                                .title(place.getDescription())
+                                .snippet(place.getAddress())
+                                .icon(BitmapDescriptorFactory
+                                        .fromResource(place.getImageResourceId())));
+            }
+        }
     }
 
     @Override

@@ -1,7 +1,11 @@
 package com.example.kitowcy.letsplaykrakow.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.kitowcy.letsplaykrakow.R;
 import com.example.kitowcy.letsplaykrakow.data.Place;
+import com.example.kitowcy.letsplaykrakow.entities.activities.PlaceActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +30,10 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.VH> {
 
 
     private List<Place> dataSet = new ArrayList<>();
+    private AppCompatActivity context;
 
-    public PlacesAdapter(Context context, @Nullable final FilterBuilder filterBuilder) {
+    public PlacesAdapter(AppCompatActivity context, @Nullable final FilterBuilder filterBuilder) {
+        this.context = context;
         Realm realm = Realm.getInstance(context);
         realm.executeTransaction(new Realm.Transaction() {
             @Override
@@ -75,12 +82,27 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.VH> {
     }
 
     @Override
-    public void onBindViewHolder(VH viewHolder, int position) {
+    public void onBindViewHolder(final VH viewHolder, int position) {
         final Place place = dataSet.get(position);
         viewHolder.letsPlayCracow.setVisibility(place.isLetsPlayKrakow() ? View.VISIBLE : View.GONE);
         viewHolder.name.setText(place.getName());
         viewHolder.description.setText(place.getDescription());
         viewHolder.image.setImageResource(place.getImageResourceId());
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @SuppressWarnings("unchecked generics")
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PlaceActivity.class);
+                intent.putExtra("NAME", place.getName());
+                intent.putExtra("DESCRIPTION", place.getDescription());
+                intent.putExtra("IMAGE_RES", place.getImageResourceId());
+                intent.putExtra("PLAY", place.isLetsPlayKrakow());
+                ActivityOptionsCompat offerDetailsTransitionOptions =
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(context,
+                                Pair.create((View) viewHolder.image, "image"));
+                context.startActivity(intent, offerDetailsTransitionOptions.toBundle());
+            }
+        });
     }
 
     @Override

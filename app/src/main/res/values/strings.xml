@@ -93,4 +93,5 @@
     <string name="API_KEY">AIzaSyCW7PH2c50g-17FFiMcPhqqWs1IgWjyY2k</string>
 
     <string name="kontakt_io_api_key">VVnUDFGRWhDDlGwkoOiOjudksaayTLwp</string>
+    <string name="title_activity_display_place">DisplayPlaceActivity</string>
 </resources>
