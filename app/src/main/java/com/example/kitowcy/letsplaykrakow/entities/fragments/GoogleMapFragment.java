@@ -255,7 +255,7 @@ public class GoogleMapFragment extends Fragment {
         double dx = p.latitude - selectedStop.latitude;
         double dy = p.longitude - selectedStop.longitude;
         double length = Math.sqrt(dx * dx + dy * dy);
-        boolean isNear = length < 0.0005;
+        boolean isNear = length < 0.0010;
         Log.d(TAG, "this poi is " + length + " far. " + (isNear ? "It is close" : "Too far"));
         return isNear;
     }

@@ -118,6 +118,9 @@ public class PlaceCreator {
         Realm realm = Realm.getInstance(context);
         realm.beginTransaction();
         realm.where(Place.class).findAll().clear();
+        realm.where(Line.class).findAll().clear();
+        realm.where(Stop.class).findAll().clear();
+
         Place alchemiaPlace = realm.createObject(Place.class);
         alchemiaPlace.setUUID("Sgwx");
         alchemiaPlace.setIsSeen(false);
