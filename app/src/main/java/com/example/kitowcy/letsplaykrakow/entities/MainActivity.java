@@ -25,20 +25,13 @@ import com.example.kitowcy.letsplaykrakow.FragmentSwitcher;
 import com.example.kitowcy.letsplaykrakow.FragmentUnit;
 import com.example.kitowcy.letsplaykrakow.MaterialDrawerAdapter;
 import com.example.kitowcy.letsplaykrakow.R;
-import com.example.kitowcy.letsplaykrakow.TapPointService;
+import com.example.kitowcy.letsplaykrakow.tappoint.TapPointService;
 import com.example.kitowcy.letsplaykrakow.beacon.KontaktBeaconService;
 import com.example.kitowcy.letsplaykrakow.data.PlaceCreator;
 import com.example.kitowcy.letsplaykrakow.entities.fragments.GoogleMapFragment;
 import com.example.kitowcy.letsplaykrakow.entities.fragments.PlacesFragment;
 import com.example.kitowcy.letsplaykrakow.location.LocationRequestBuilder;
 import com.example.kitowcy.letsplaykrakow.location.LocationService;
-import com.google.android.gms.auth.api.Auth;
-import com.proxama.tappoint.auth.AuthListener;
-import com.proxama.tappoint.auth.Authentication;
-import com.proxama.tappoint.error.ApiError;
-import com.proxama.tappoint.sync.SyncListener;
-import com.proxama.tappoint.sync.SyncResult;
-import com.proxama.tappoint.sync.Synchronisation;
 
 public class MainActivity extends AppCompatActivity {
     private static MainActivity instance;

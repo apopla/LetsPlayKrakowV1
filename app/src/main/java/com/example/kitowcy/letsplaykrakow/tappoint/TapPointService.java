@@ -1,7 +1,8 @@
-package com.example.kitowcy.letsplaykrakow;
+package com.example.kitowcy.letsplaykrakow.tappoint;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -12,6 +13,7 @@ import com.proxama.tappoint.error.ApiError;
 import com.proxama.tappoint.sync.SyncListener;
 import com.proxama.tappoint.sync.SyncResult;
 import com.proxama.tappoint.sync.Synchronisation;
+import com.proxama.tappoint.trigger.Triggers;
 
 /**
  * Created by Arek on 22.11.2015.
@@ -20,6 +22,8 @@ public class TapPointService extends Service implements AuthListener, SyncListen
 
     private static final String TAG = TapPointService.class.getName();
     private static final String APP_NAME = "khlizardman";
+
+    private TapPointEventBroadcastReceiver tapPointEventBroadcastReceiver = new TapPointEventBroadcastReceiver();
 
     public TapPointService() {
         super();
@@ -43,6 +47,12 @@ public class TapPointService extends Service implements AuthListener, SyncListen
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Triggers.getTriggersManager(this).stopMonitoring();
+    }
+
+    @Override
     public void onAuthSuccess() {
         Log.d(TAG, "Authentication successful !");
         Synchronisation.getSyncManager(this).synchronise(TapPointService.this);
@@ -56,6 +66,8 @@ public class TapPointService extends Service implements AuthListener, SyncListen
     @Override
     public void onSyncSuccess(SyncResult syncResult) {
         Log.d(TAG, "Sync successful !");
+        Triggers.getTriggersManager(this).startMonitoring();
+
     }
 
     @Override

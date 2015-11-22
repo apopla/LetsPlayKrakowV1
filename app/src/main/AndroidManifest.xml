@@ -13,6 +13,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <uses-feature
         android:name="android.hardware.bluetooth"
@@ -55,7 +56,7 @@
             android:exported="false" />
 
         <service
-            android:name=".TapPointService"
+            android:name=".tappoint.TapPointService"
             android:exported="false" />
         <service
             android:name="com.kontakt.sdk.android.ble.service.ProximityService"
@@ -74,7 +75,50 @@
             android:name="android.hardware.bluetooth_le"
             android:required="true"/>
 
+
+        <provider
+            android:name="com.proxama.trigger.ble.model.dao.BleTriggerProvider"
+            android:authorities="com.example.kitowcy.letsplaykrakow.bletriggerprovider"
+            android:exported="false">
+        </provider>
+
         <service android:name="com.proxama.tappointauth.sync.SyncService"/>
+        <service android:name="com.proxama.trigger.ble.BleTriggerService"/>
+        <service android:name="com.proxama.ble.BleScannerManagerImpl"></service>
+
+        <receiver android:name="com.proxama.ble.BleScannerBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.proxama.ble.scanner.ACTION_SCHEDULE_SCAN"></action>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="com.proxama.trigger.ble.BleScanEventReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.proxama.ble.scanner.ACTION_SCAN_COMPLETE" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="com.proxama.tappoint.internal.trigger.module.BleTriggerEventReceiver" >
+            <intent-filter>
+                <action android:name="com.proxama.trigger.ble.processor.TRIGGEREVENTS" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="com.example.kitowcy.letsplaykrakow.tappoint.TapPointEventBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.proxama.tappoint.action.ACTION_TRIGGERS_DETECTED"/>
+            </intent-filter>
+        </receiver>
 
     </application>
 
