@@ -36,6 +36,61 @@ public class PlaceCreator {
         Double staraSynagogaLat = 50.051420;
         Double staraSynagogaLng = 19.948415;
 
+        String pierozkiName = "Pierozki u Vincenta";
+        String pierozkiDescription = "The speciality, as the restaurant name suggests, are a whole variety of Polish dumplings (pierogi), hand-made little dough parcels with delicious fillings that are highly popular, traditional Polish fare. Normally you'd expect just a few varieties to choose from, but this cosy place has concocted dozens of varieties, such as with chicken and pineapple and some vegetarian versions like the popular spinach and mozzarella, a variety of fruits or dried prunes. They also rustle up the special 'Vincent' dumpling with meat and lentils. Open daily from noon til evening, they also gladly do take-aways.";
+        String pierozkiAddress = "ul. Bozego Ciala 12";
+        Double pierozkiLat = 50.051590;
+        Double pierozkiLng = 19.943569;
+
+        String singerName = "Singer";
+        String singerDescription = "A Kazimierz legend - dim and gloomy, with shadows deep enough to drown the moodiest drinker, and illumination provided by an all-day candle vigil. Come in off the Jewish Square (Plac Zydowski) for a warming vodka or warm beer with fruit syrup, and lose track of the time altogether. Don't expect any live vocals, except in the early hours from an uproarious crowd - the bar is actually named after the Singer sewing machines and trestle tables scattered about the place. Classic Cracow.";
+        String singerAddress = "ul. Estery 20";
+        Double singerLat = 50.051184;
+        Double singerLng = 19.945794;
+
+        String flowerPowerName = "Flower Power";
+        String flowerPowerDescription = "There will be waiting for you things like water pipes, soft pillows, sounds, smells, food. Peace & Love. Our arange sopu with carrot won Soup festival in 2005. First private, free hot spot!";
+        String flowerPowerAddress = "ul. Nowa 3";
+        Double flowerPowerLat = 50.051302;
+        Double flowerPowerLng = 19.944552;
+
+        String omertaName = "Omerta";
+        String omertaDescription = "God Father themed pub, serving several regional beers. ";
+        String omertaAddress = "ul. Kupa 3";
+        Double omertaLat = 50.052063;
+        Double omertaLng = 19.945772;
+
+        String sasiedziName = "Restauracja Sasiedzi";
+        String sasiedziDescription = "Our chefs are specializing in traditional Polish dishes, dinners and unique desserts. Thanks to their passion and inexhaustible creativity dishes served by professional waiters, are memorable – those which everybody wants to come back for. By Sąsiedzi Restaurant you can feel the taste of pleasure and warm, friendly atmosphere.";
+        String sasiedziAddress = "ul. Miodowa 25";
+        Double sasiedziLat = 50.051598;
+        Double sasiedziLng = 19.942651;
+
+        String remuhName = "Remuh synagogue and cementary";
+        String remuhDescription = "The synagogue was erected in the sixteenth century for Moses Isserles, aka Remuh, the rabbi of Krakow and the famous codifier of Jewish law. Inside, visitors can see the Aron Kodesh (the Torah ark), the bimah - a place for reading the Torah and original paintings. Found at the cemetery adjacent to the synagogue in the 1950's were approx. 700 tombstones from the period of fourteenth to nineteenth century. Jews from all over the world come here to visit the tomb of Moses Isserles";
+        String remuhAddress = "ul. Jakuba 4";
+        Double remuhLat = 50.052320;
+        Double remuhLng = 19.946765;
+
+        String isaacName = "Isaac's synagogue";
+        String isaacDescription = "Built with the consent of King Władysław IV Vasa in the seventeenth century, it is the largest synagogue located in Kazimierz. Its austere interior is decorated with early Baroque stucco. After World War II the temple was left in disrepair, until the late 80's when it was thoroughly renovated. The building was handed over to the Jewish Commune, who leased the synagogue to one of the Hasidic communities in 2007 for cult purposes.";
+        String isaacAddress = "ul. Estery";
+        Double isaacLat = 50.051559;
+        Double isaacLng = 19.946601;
+
+        String corpusChristiName = "Corpus Christi Church";
+        String corpusChristiDescription = "The church was founded as the main temple of the newly founded city of Kazimierz; its construction began in 1340. Since the beginning of the fifteenth century the church remains under the care of the Canons Regular of the Lateran. Almost all of the temple's original equipment was destroyed during the Swedish invasion in 1655. As a result, the Gothic church received rich, baroque features, the most impressive of which is the pulpit, sculpted into a boat supported by mermaids and dolphins. Inside the church buried is Bartolomeo Berrecci, a native of Florence, architect and sculptor, the author of the Sigismund Chapel in Wawel Castle.";
+        String corpusChristiAddress = "ul. Bozego Ciala 26";
+        Double corpusChristiLat = 50.049601;
+        Double corpusChristiLng = 19.944586;
+
+        String pauliteName = "Paulite Church on the Rock";
+        String pauliteDescription = "Centuries-old tradition has associated the Church on the Rock with the martyred Bishop Stanislaus. The Church dignitary suffered death in this place as a result of the conflict with King Bolesław the Brave in the eleventh century. Very soon, the person of the Bishop became the object of worship, and the place of his death - a pilgrimage destination. The present church dates to the mid- eighteenth century. The façade is decorated with a monumental staircase, under which is the entrance to the nineteenth century Honour Crypt. It is the place of burial for, e.g. Stanisław Wyspiański, composer Karol Szymanowski and mathematician Tadeusz Banachiewicz. The latest burial at the Church on the Rock – of the Nobel laureate Czesław Miłosz – gathered thousands of people.";
+        String pauliteAddress = "ul. Skaleczna 15";
+        Double pauliteLat = 50.048140;
+        Double pauliteLng = 19.937664;
+
+
         Realm realm = Realm.getInstance(context);
         realm.beginTransaction();
         realm.where(Place.class).findAll().clear();
@@ -74,14 +129,102 @@ public class PlaceCreator {
 
         Place pierozkiPlace = realm.createObject(Place.class);
         pierozkiPlace.setUUID(UUID.randomUUID().toString());
-        pierozkiPlace.setName(staraSynagogaName);
-        pierozkiPlace.setCategory(context.getResources().getString(R.string.monument_category));
-        pierozkiPlace.setImageResourceId(R.drawable.synagoga);
-        pierozkiPlace.setDescription(staraSynagogaDescription);
-        pierozkiPlace.setAddress(staraSynagogaAddress);
-        pierozkiPlace.setLatitude(staraSynagogaLat);
-        pierozkiPlace.setLongitude(staraSynagogaLng);
+        pierozkiPlace.setName(pierozkiName);
+        pierozkiPlace.setCategory(context.getResources().getString(R.string.food_category));
+        pierozkiPlace.setImageResourceId(R.drawable.vincent);
+        pierozkiPlace.setDescription(pierozkiDescription);
+        pierozkiPlace.setAddress(pierozkiAddress);
+        pierozkiPlace.setLatitude(pierozkiLat);
+        pierozkiPlace.setLongitude(pierozkiLng);
         pierozkiPlace.setLetsPlayKrakow(false);
+
+        Place singerPlace = realm.createObject(Place.class);
+        singerPlace.setUUID(UUID.randomUUID().toString());
+        singerPlace.setName(singerName);
+        singerPlace.setCategory(context.getResources().getString(R.string.fun_category));
+        singerPlace.setImageResourceId(R.drawable.singer);
+        singerPlace.setDescription(singerDescription);
+        singerPlace.setAddress(singerAddress);
+        singerPlace.setLatitude(singerLat);
+        singerPlace.setLongitude(singerLng);
+        singerPlace.setLetsPlayKrakow(false);
+
+        Place paulitePlace = realm.createObject(Place.class);
+        paulitePlace.setUUID(UUID.randomUUID().toString());
+        paulitePlace.setName(pauliteName);
+        paulitePlace.setCategory(context.getResources().getString(R.string.monument_category));
+        paulitePlace.setImageResourceId(R.drawable.paulini);
+        paulitePlace.setDescription(pauliteDescription);
+        paulitePlace.setAddress(pauliteAddress);
+        paulitePlace.setLatitude(pauliteLat);
+        paulitePlace.setLongitude(pauliteLng);
+        paulitePlace.setLetsPlayKrakow(true);
+
+        Place flowerPlace = realm.createObject(Place.class);
+        flowerPlace.setUUID(UUID.randomUUID().toString());
+        flowerPlace.setName(flowerPowerName);
+        flowerPlace.setCategory(context.getResources().getString(R.string.fun_category));
+        flowerPlace.setImageResourceId(R.drawable.flower);
+        flowerPlace.setDescription(flowerPowerDescription);
+        flowerPlace.setAddress(flowerPowerAddress);
+        flowerPlace.setLatitude(flowerPowerLat);
+        flowerPlace.setLongitude(flowerPowerLng);
+        flowerPlace.setLetsPlayKrakow(false);
+
+        Place omertaPlace = realm.createObject(Place.class);
+        omertaPlace.setUUID(UUID.randomUUID().toString());
+        omertaPlace.setName(omertaName);
+        omertaPlace.setCategory(context.getResources().getString(R.string.fun_category));
+        omertaPlace.setImageResourceId(R.drawable.godfather);
+        omertaPlace.setDescription(omertaDescription);
+        omertaPlace.setAddress(omertaAddress);
+        omertaPlace.setLatitude(omertaLat);
+        omertaPlace.setLongitude(omertaLng);
+        omertaPlace.setLetsPlayKrakow(false);
+
+        Place corpusPlace = realm.createObject(Place.class);
+        corpusPlace.setUUID(UUID.randomUUID().toString());
+        corpusPlace.setName(corpusChristiName);
+        corpusPlace.setCategory(context.getResources().getString(R.string.monument_category));
+        corpusPlace.setImageResourceId(R.drawable.bozegociala);
+        corpusPlace.setDescription(corpusChristiDescription);
+        corpusPlace.setAddress(corpusChristiAddress);
+        corpusPlace.setLatitude(corpusChristiLat);
+        corpusPlace.setLongitude(corpusChristiLng);
+        corpusPlace.setLetsPlayKrakow(true);
+
+        Place sasiedziPlace = realm.createObject(Place.class);
+        sasiedziPlace.setUUID(UUID.randomUUID().toString());
+        sasiedziPlace.setName(sasiedziName);
+        sasiedziPlace.setCategory(context.getResources().getString(R.string.food_category));
+        sasiedziPlace.setImageResourceId(R.drawable.sasiedzi);
+        sasiedziPlace.setDescription(sasiedziDescription);
+        sasiedziPlace.setAddress(sasiedziAddress);
+        sasiedziPlace.setLatitude(sasiedziLat);
+        sasiedziPlace.setLongitude(sasiedziLng);
+        sasiedziPlace.setLetsPlayKrakow(false);
+
+        Place remuhPlace = realm.createObject(Place.class);
+        remuhPlace.setUUID(UUID.randomUUID().toString());
+        remuhPlace.setName(remuhName);
+        remuhPlace.setCategory(context.getResources().getString(R.string.monument_category));
+        remuhPlace.setImageResourceId(R.drawable.remuh);
+        remuhPlace.setDescription(remuhDescription);
+        remuhPlace.setAddress(remuhAddress);
+        remuhPlace.setLatitude(remuhLat);
+        remuhPlace.setLongitude(remuhLng);
+        remuhPlace.setLetsPlayKrakow(true);
+
+        Place isaacPlace = realm.createObject(Place.class);
+        isaacPlace.setUUID(UUID.randomUUID().toString());
+        isaacPlace.setName(isaacName);
+        isaacPlace.setCategory(context.getResources().getString(R.string.monument_category));
+        isaacPlace.setImageResourceId(R.drawable.isaac);
+        isaacPlace.setDescription(isaacDescription);
+        isaacPlace.setAddress(isaacAddress);
+        isaacPlace.setLatitude(isaacLat);
+        isaacPlace.setLongitude(isaacLng);
+        isaacPlace.setLetsPlayKrakow(true);
 
 
         realm.commitTransaction();
