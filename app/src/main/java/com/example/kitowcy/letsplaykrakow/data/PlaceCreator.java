@@ -96,6 +96,7 @@ public class PlaceCreator {
         realm.where(Place.class).findAll().clear();
         Place alchemiaPlace = realm.createObject(Place.class);
         alchemiaPlace.setUUID("Sgwx");
+        alchemiaPlace.setIsSeen(false);
         alchemiaPlace.setName(alchemiaName);
         alchemiaPlace.setCategory(context.getResources().getString(R.string.fun_category));
         alchemiaPlace.setImageResourceId(R.drawable.alchemia);
@@ -107,6 +108,7 @@ public class PlaceCreator {
 
         Place kolankoPlace = realm.createObject(Place.class);
         kolankoPlace.setUUID(UUID.randomUUID().toString());
+        alchemiaPlace.setIsSeen(false);
         kolankoPlace.setName(kolankoName);
         kolankoPlace.setCategory(context.getResources().getString(R.string.food_category));
         kolankoPlace.setImageResourceId(R.drawable.kolanko);
@@ -118,6 +120,7 @@ public class PlaceCreator {
 
         Place staraSynagogaPlace = realm.createObject(Place.class);
         staraSynagogaPlace.setUUID("cIKQ");
+        alchemiaPlace.setIsSeen(false);
         staraSynagogaPlace.setName(staraSynagogaName);
         staraSynagogaPlace.setCategory(context.getResources().getString(R.string.monument_category));
         staraSynagogaPlace.setImageResourceId(R.drawable.synagoga);
@@ -130,6 +133,7 @@ public class PlaceCreator {
         Place pierozkiPlace = realm.createObject(Place.class);
         pierozkiPlace.setUUID(UUID.randomUUID().toString());
         pierozkiPlace.setName(pierozkiName);
+        alchemiaPlace.setIsSeen(false);
         pierozkiPlace.setCategory(context.getResources().getString(R.string.food_category));
         pierozkiPlace.setImageResourceId(R.drawable.vincent);
         pierozkiPlace.setDescription(pierozkiDescription);
@@ -141,6 +145,7 @@ public class PlaceCreator {
         Place singerPlace = realm.createObject(Place.class);
         singerPlace.setUUID(UUID.randomUUID().toString());
         singerPlace.setName(singerName);
+        alchemiaPlace.setIsSeen(false);
         singerPlace.setCategory(context.getResources().getString(R.string.fun_category));
         singerPlace.setImageResourceId(R.drawable.singer);
         singerPlace.setDescription(singerDescription);
@@ -152,6 +157,7 @@ public class PlaceCreator {
         Place paulitePlace = realm.createObject(Place.class);
         paulitePlace.setUUID(UUID.randomUUID().toString());
         paulitePlace.setName(pauliteName);
+        alchemiaPlace.setIsSeen(false);
         paulitePlace.setCategory(context.getResources().getString(R.string.monument_category));
         paulitePlace.setImageResourceId(R.drawable.paulini);
         paulitePlace.setDescription(pauliteDescription);
@@ -163,6 +169,7 @@ public class PlaceCreator {
         Place flowerPlace = realm.createObject(Place.class);
         flowerPlace.setUUID(UUID.randomUUID().toString());
         flowerPlace.setName(flowerPowerName);
+        alchemiaPlace.setIsSeen(false);
         flowerPlace.setCategory(context.getResources().getString(R.string.fun_category));
         flowerPlace.setImageResourceId(R.drawable.flower);
         flowerPlace.setDescription(flowerPowerDescription);
@@ -174,6 +181,7 @@ public class PlaceCreator {
         Place omertaPlace = realm.createObject(Place.class);
         omertaPlace.setUUID(UUID.randomUUID().toString());
         omertaPlace.setName(omertaName);
+        alchemiaPlace.setIsSeen(false);
         omertaPlace.setCategory(context.getResources().getString(R.string.fun_category));
         omertaPlace.setImageResourceId(R.drawable.godfather);
         omertaPlace.setDescription(omertaDescription);
@@ -185,6 +193,7 @@ public class PlaceCreator {
         Place corpusPlace = realm.createObject(Place.class);
         corpusPlace.setUUID(UUID.randomUUID().toString());
         corpusPlace.setName(corpusChristiName);
+        alchemiaPlace.setIsSeen(false);
         corpusPlace.setCategory(context.getResources().getString(R.string.monument_category));
         corpusPlace.setImageResourceId(R.drawable.bozegociala);
         corpusPlace.setDescription(corpusChristiDescription);
@@ -196,6 +205,7 @@ public class PlaceCreator {
         Place sasiedziPlace = realm.createObject(Place.class);
         sasiedziPlace.setUUID(UUID.randomUUID().toString());
         sasiedziPlace.setName(sasiedziName);
+        alchemiaPlace.setIsSeen(false);
         sasiedziPlace.setCategory(context.getResources().getString(R.string.food_category));
         sasiedziPlace.setImageResourceId(R.drawable.sasiedzi);
         sasiedziPlace.setDescription(sasiedziDescription);
@@ -207,6 +217,7 @@ public class PlaceCreator {
         Place remuhPlace = realm.createObject(Place.class);
         remuhPlace.setUUID(UUID.randomUUID().toString());
         remuhPlace.setName(remuhName);
+        alchemiaPlace.setIsSeen(false);
         remuhPlace.setCategory(context.getResources().getString(R.string.monument_category));
         remuhPlace.setImageResourceId(R.drawable.remuh);
         remuhPlace.setDescription(remuhDescription);
@@ -218,6 +229,7 @@ public class PlaceCreator {
         Place isaacPlace = realm.createObject(Place.class);
         isaacPlace.setUUID(UUID.randomUUID().toString());
         isaacPlace.setName(isaacName);
+        alchemiaPlace.setIsSeen(false);
         isaacPlace.setCategory(context.getResources().getString(R.string.monument_category));
         isaacPlace.setImageResourceId(R.drawable.isaac);
         isaacPlace.setDescription(isaacDescription);

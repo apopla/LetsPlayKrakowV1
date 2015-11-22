@@ -168,13 +168,19 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
                     Log.d(TAG, "Beacon ranging: unique id: " + beaconDevice.getUniqueId());
                     Realm realm = Realm.getInstance(getApplicationContext());
                     Place place = realm.where(Place.class).equalTo("UUID", beaconDevice.getUniqueId()).findFirst();
-                    Intent intent = new Intent(getApplicationContext(), PlaceActivity.class);
-                    intent.putExtra("NAME", place.getName());
-                    intent.putExtra("DESCRIPTION", place.getDescription());
-                    intent.putExtra("IMAGE_RES", place.getImageResourceId());
-                    intent.putExtra("PLAY", place.isLetsPlayKrakow());
-                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    getApplicationContext().startActivity(intent);
+                    if(!place.isSeen()) {
+                        realm.beginTransaction();
+                        place.setIsSeen(true);
+                        realm.copyToRealmOrUpdate(place);
+                        realm.commitTransaction();
+                        Intent intent = new Intent(getApplicationContext(), PlaceActivity.class);
+                        intent.putExtra("NAME", place.getName());
+                        intent.putExtra("DESCRIPTION", place.getDescription());
+                        intent.putExtra("IMAGE_RES", place.getImageResourceId());
+                        intent.putExtra("PLAY", place.isLetsPlayKrakow());
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getApplicationContext().startActivity(intent);
+                    }
                 }
             }
             break;
