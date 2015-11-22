@@ -4,7 +4,8 @@
     tools:context=".MainActivity">
     <item
         android:id="@+id/filter"
+        android:icon="@drawable/filter"
         android:orderInCategory="100"
-        android:title="FILTER"
-        app:showAsAction="never" />
+        android:title="Filter"
+        app:showAsAction="always" />
 </menu>

@@ -92,8 +92,8 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.VH> {
         viewHolder.description.setText(shortDescription + "...");
         Picasso.with(context).load(place.getImageResourceId()).into(viewHolder.image);
 
-        viewHolder.itemView.setBackgroundColor(position % 2 == 0 ?
-                context.getResources().getColor(R.color.colorPrimary100) : context.getResources().getColor(R.color.colorPrimary200));
+//        viewHolder.itemView.setBackgroundColor(position % 2 == 0 ?
+//                context.getResources().getColor(R.color.colorPrimary100) : context.getResources().getColor(R.color.colorPrimary200));
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @SuppressWarnings("unchecked generics")
             @Override
@@ -128,8 +128,8 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.VH> {
             description = (TextView) itemView.findViewById(R.id.place_description);
             image = (ImageView) itemView.findViewById(R.id.place_image);
             letsPlayCracow = (ImageView) itemView.findViewById(R.id.place_play_krakow);
-            description.setTextColor(Color.WHITE);
-            name.setTextColor(Color.WHITE);
+//            description.setTextColor(Color.WHITE);
+//            name.setTextColor(Color.WHITE);
         }
     }
 }
