@@ -27,7 +27,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import io.realm.Realm;
@@ -167,7 +166,7 @@ public class GoogleMapFragment extends Fragment {
 
             for (Place place : places) {
                 Log.d(TAG, "draw new Marker: " + place.getName());
-                Marker m =
+//                Marker m =
                         map.addMarker(new MarkerOptions()
                                 .position(new LatLng(place.getLatitude(), place.getLongitude()))
                                 .title(place.getDescription())
