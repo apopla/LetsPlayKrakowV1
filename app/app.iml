@@ -117,17 +117,17 @@
     <orderEntry type="library" exported="" name="core-1.4.4" level="project" />
     <orderEntry type="library" exported="" name="kontakt.io-android-sdk-2.0.0" level="project" />
     <orderEntry type="library" exported="" name="retrofit-1.9.0" level="project" />
-    <orderEntry type="library" exported="" name="tappoint-v2.0.0.gbbf40c0" level="project" />
-    <orderEntry type="library" exported="" name="gson-2.3.1" level="project" />
     <orderEntry type="library" exported="" name="javawriter" level="project" />
+    <orderEntry type="library" exported="" name="gson-2.3.1" level="project" />
+    <orderEntry type="library" exported="" name="tappoint-v2.0.0.gbbf40c0" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="okhttp-2.5.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-maps-8.1.0" level="project" />
     <orderEntry type="library" exported="" name="kontakt.io-ble-sdk-2.0.0" level="project" />
     <orderEntry type="library" exported="" name="android-maps-utils-0.3.4" level="project" />
-    <orderEntry type="library" exported="" name="realm-android-0.83.1" level="project" />
     <orderEntry type="library" exported="" name="javax.inject" level="project" />
+    <orderEntry type="library" exported="" name="realm-android-0.83.1" level="project" />
     <orderEntry type="library" exported="" name="play-services-location-8.1.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="rxandroid-0.25.0" level="project" />
