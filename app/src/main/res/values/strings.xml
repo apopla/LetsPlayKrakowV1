@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LetsPlayKrakow</string>
+    <string name="app_name">Lets Play Krakow</string>
     <string name="action_settings">Settings</string>
     <string name="open_drawer">open drawer</string>
     <string name="close_drawer">close drawer</string>
@@ -91,6 +91,17 @@
     <string name="tx_power_level">Power: %1$d dBm</string>
     <string name="range_all_beacons">Range all types</string>
     <string name="API_KEY">AIzaSyCW7PH2c50g-17FFiMcPhqqWs1IgWjyY2k</string>
+
+    <string name="monument_category">MONUMENTS</string>
+    <string name="food_category">FOOD</string>
+    <string name="fun_category">ENTERTAINMENT</string>
+    <string name="culture_category">CULTURE</string>
+
+
+
+
+
+
 
     <string name="kontakt_io_api_key">VVnUDFGRWhDDlGwkoOiOjudksaayTLwp</string>
 </resources>

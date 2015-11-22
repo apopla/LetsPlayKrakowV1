@@ -50,7 +50,7 @@ public class GoogleMapFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate ");
-        getActivity().setTitle("Current Location");
+        getActivity().setTitle("Krakow Places Map");
     }
 
     @Override
