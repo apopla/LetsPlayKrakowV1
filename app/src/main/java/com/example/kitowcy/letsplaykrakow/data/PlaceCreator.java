@@ -38,6 +38,7 @@ public class PlaceCreator {
 
         Realm realm = Realm.getInstance(context);
         realm.beginTransaction();
+        realm.where(Place.class).findAll().clear();
         Place alchemiaPlace = realm.createObject(Place.class);
         alchemiaPlace.setUUID(UUID.randomUUID().toString());
         alchemiaPlace.setName(alchemiaName);
@@ -70,12 +71,6 @@ public class PlaceCreator {
         staraSynagogaPlace.setLatitude(staraSynagogaLat);
         staraSynagogaPlace.setLongitude(staraSynagogaLng);
         staraSynagogaPlace.setLetsPlayKrakow(true);
-
-
-
-     /*   realm.copyToRealm(alchemiaPlace);
-        realm.copyToRealm(kolankoPlace);
-        realm.copyToRealm(staraSynagogaPlace);*/
 
         realm.commitTransaction();
 
