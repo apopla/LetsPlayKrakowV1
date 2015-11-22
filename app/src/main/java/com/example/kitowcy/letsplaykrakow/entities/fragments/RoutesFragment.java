@@ -26,7 +26,7 @@ public class RoutesFragment extends Fragment {
 
     private RelativeLayout layoutOsemka;
     private MainActivity parentActivity;
-    private RelativeLayout layoutOsemka, layoutDwadziescia;
+    private RelativeLayout layoutDwadziescia;
 
     public static RoutesFragment newInstance() {
         RoutesFragment fragment = new RoutesFragment();
