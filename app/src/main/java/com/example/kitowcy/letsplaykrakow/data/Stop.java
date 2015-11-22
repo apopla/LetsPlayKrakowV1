@@ -1,5 +1,7 @@
 package com.example.kitowcy.letsplaykrakow.data;
 
+import java.util.UUID;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -8,9 +10,23 @@ import io.realm.annotations.PrimaryKey;
  */
 public class Stop extends RealmObject {
     @PrimaryKey
+    private String uuid;
     private String name;
     private Double latitude;
     private Double longitude;
+
+    public Stop() {
+        uuid = UUID.randomUUID().toString();
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public String getUuid() {
+
+        return uuid;
+    }
 
     public String getName() {
         return name;
