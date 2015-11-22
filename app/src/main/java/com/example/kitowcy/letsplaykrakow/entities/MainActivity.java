@@ -1,5 +1,6 @@
 package com.example.kitowcy.letsplaykrakow.entities;
 
+import android.app.ActionBar;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -41,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
         return drawer;
     }
 
-    private ServiceConnection serviceConnection;
-
     private Messenger serviceMessenger;
     public static final String TAG = MainActivity.class.getSimpleName();
     private Toolbar toolbar;                              // Declaring the Toolbar Object
@@ -60,8 +59,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_material);
         setupDrawer();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        if (getActionBar() == null){
+            Log.d(TAG, "onCreate: action bar tez null :(");
+        } else {
+            Log.d(TAG, "onCreate: action bar nie jest null!! :)");
+        }
 
         showSplashFragment();
         setupLocationService();
@@ -90,13 +94,13 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
     }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        Log.d(TAG, "onPostCreate()");
-        super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
-
-    }
+//    @Override
+//    protected void onPostCreate(Bundle savedInstanceState) {
+//        Log.d(TAG, "onPostCreate()");
+//        super.onPostCreate(savedInstanceState);
+//        mDrawerToggle.syncState();
+//
+//    }
 
     @Override
     protected void onDestroy() {
@@ -147,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupDrawer() {
         Log.d(TAG, "setupDrawer()");
-        boolean userIsLogged = false;
+
         drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);        // drawer object Assigned to the view
         android.support.v7.widget.RecyclerView recyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
 
@@ -174,6 +178,13 @@ public class MainActivity extends AppCompatActivity {
         }; // drawer Toggle Object Made
         drawer.setDrawerListener(mDrawerToggle); // drawer Listener set to the drawer toggle
         mDrawerToggle.syncState();
+
+        ActionBar actionBar = getActionBar();
+        if (actionBar==null){
+            Log.d(TAG, "action bar is null :(");
+        } else {
+            Log.d(TAG, "action bar is not null!!! :)");
+        }
     }
 
     @Override
@@ -184,24 +195,24 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }

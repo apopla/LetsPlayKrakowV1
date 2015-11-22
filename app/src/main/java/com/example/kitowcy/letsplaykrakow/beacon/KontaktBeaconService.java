@@ -14,8 +14,16 @@ import com.kontakt.sdk.android.ble.configuration.scan.IBeaconScanContext;
 import com.kontakt.sdk.android.ble.configuration.scan.ScanContext;
 import com.kontakt.sdk.android.ble.connection.OnServiceReadyListener;
 import com.kontakt.sdk.android.ble.discovery.BluetoothDeviceEvent;
+import com.kontakt.sdk.android.ble.discovery.EventType;
+import com.kontakt.sdk.android.ble.discovery.ibeacon.IBeaconDeviceEvent;
+import com.kontakt.sdk.android.ble.filter.ibeacon.IBeaconFilter;
+import com.kontakt.sdk.android.ble.filter.ibeacon.IBeaconFilters;
 import com.kontakt.sdk.android.ble.manager.ProximityManager;
+import com.kontakt.sdk.android.common.profile.IBeaconDevice;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -25,21 +33,16 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
 
     private static final String TAG = KontaktBeaconService.class.getName();
 
+    private static final String AREK_BLACK_BEACON_UNIQUE_UUID = "Sgwx";
+    private static final String AREK_WHITE_BEACON_UNIQUE_UUID = "cIKQ";
+
+    private static final int BEACON_MONITORING_TIME = 5;
+    private static final int BEACON_RANGING_TIME = 3;
+
     private ProximityManager beaconManager;
-
+    private List<IBeaconFilter> filteredBeaconList;
     private IBeaconScanContext iBeaconScanContext;
-
-    /**
-     * Scan context
-     */
-    private ScanContext scanContext = new ScanContext.Builder()
-            .setScanMode(ProximityManager.SCAN_MODE_BALANCED)
-            .setActivityCheckConfiguration(ActivityCheckConfiguration.DEFAULT)
-            .setForceScanConfiguration(ForceScanConfiguration.DEFAULT)
-            .setIBeaconScanContext(IBeaconScanContext.DEFAULT)
-            .setScanPeriod(new ScanPeriod(TimeUnit.SECONDS.toMillis(7), TimeUnit.SECONDS.toMillis(3)))
-            .build();
-
+    private ScanContext scanContext;
 
     public KontaktBeaconService() {
         super();
@@ -50,6 +53,9 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
         Log.d(TAG, "onCreate() called with: " + "");
 
         super.onCreate();
+        initializeBeaconFilter();
+        initializeIBeaconScanContext();
+        initializeScanContext();
         initializeProximityManager();
     }
 
@@ -76,6 +82,36 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
         beaconManager.disconnect();
         beaconManager = null;
     }
+
+    private void initializeBeaconFilter() {
+        Log.d(TAG, "initializeBeaconFilter() called with: " + "");
+
+        filteredBeaconList = new ArrayList<>();
+        filteredBeaconList.add(IBeaconFilters.newUniqueIdFilter(AREK_BLACK_BEACON_UNIQUE_UUID));
+        filteredBeaconList.add(IBeaconFilters.newUniqueIdFilter(AREK_WHITE_BEACON_UNIQUE_UUID));
+    }
+
+    private void initializeIBeaconScanContext() {
+        Log.d(TAG, "initializeIBeaconScanContext() called with: " + "");
+
+        iBeaconScanContext = new IBeaconScanContext.Builder()
+                .setEventTypes(EnumSet.of(EventType.DEVICE_DISCOVERED, EventType.DEVICE_LOST, EventType.DEVICES_UPDATE, EventType.SPACE_ABANDONED, EventType.SPACE_ENTERED))
+                .setIBeaconFilters(filteredBeaconList)
+                .build();
+    }
+
+    private void initializeScanContext() {
+        Log.d(TAG, "initializeScanContext() called with: " + "");
+
+        scanContext = new ScanContext.Builder()
+                .setScanMode(ProximityManager.SCAN_MODE_BALANCED)
+                .setActivityCheckConfiguration(ActivityCheckConfiguration.DEFAULT)
+                .setForceScanConfiguration(ForceScanConfiguration.DEFAULT)
+                .setIBeaconScanContext(iBeaconScanContext)
+                .setScanPeriod(new ScanPeriod(TimeUnit.SECONDS.toMillis(BEACON_MONITORING_TIME), TimeUnit.SECONDS.toMillis(BEACON_RANGING_TIME)))
+                .build();
+    }
+
 
     private void initializeProximityManager() {
         Log.d(TAG, "initializeProximityManager() called with: " + "");
@@ -109,5 +145,28 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
     @Override
     public void onEvent(BluetoothDeviceEvent event) {
         Log.d(TAG, "onEvent() called with: " + "event = [" + event + "]");
+
+        final IBeaconDeviceEvent iBeaconDeviceEvent = (IBeaconDeviceEvent) event;
+
+        switch(event.getEventType()) {
+
+            case DEVICE_DISCOVERED: {
+
+            }
+            break;
+
+            case DEVICES_UPDATE: {
+
+                for (IBeaconDevice beaconDevice : iBeaconDeviceEvent.getDeviceList()) {
+                    Log.d(TAG, "Device discovered !");
+                    Log.d(TAG, "Beacon ranging: major: " + beaconDevice.getMajor());
+                    Log.d(TAG, "Beacon ranging: minor: " + beaconDevice.getMinor());
+                    Log.d(TAG, "Beacon ranging: unique id: " + beaconDevice.getUniqueId());
+                }
+            }
+            break;
+
+
+        }
     }
 }
