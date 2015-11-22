@@ -2,6 +2,7 @@ package com.example.kitowcy.letsplaykrakow.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
@@ -88,7 +89,11 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.VH> {
         viewHolder.name.setText(place.getName());
         String shortDescription = place.getDescription().substring(0, Math.min(place.getDescription().length(), 100));
         viewHolder.description.setText(shortDescription + "...");
+        viewHolder.description.setTextColor(Color.WHITE);
+        viewHolder.name.setTextColor(Color.WHITE);
         viewHolder.image.setImageResource(place.getImageResourceId());
+        viewHolder.itemView.setBackgroundColor(context.getResources()
+                .getColor(position % 2 == 0 ? R.color.colorPrimary400 : R.color.colorPrimary600));
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @SuppressWarnings("unchecked generics")
             @Override

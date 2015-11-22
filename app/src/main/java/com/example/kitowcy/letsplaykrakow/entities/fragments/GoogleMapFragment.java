@@ -169,8 +169,8 @@ public class GoogleMapFragment extends Fragment {
 //                Marker m =
                 map.addMarker(new MarkerOptions()
                         .position(new LatLng(place.getLatitude(), place.getLongitude()))
-                        .title(place.getDescription())
-                        .snippet(place.getName())
+                        .title(place.getName())
+                        .snippet(place.getAddress())
                         .icon(BitmapDescriptorFactory
                                 .fromResource(getCategorizedResource(place.getCategory()))
 
