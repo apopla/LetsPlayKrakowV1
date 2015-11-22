@@ -25,6 +25,8 @@ import com.example.kitowcy.letsplaykrakow.FragmentSwitcher;
 import com.example.kitowcy.letsplaykrakow.FragmentUnit;
 import com.example.kitowcy.letsplaykrakow.MaterialDrawerAdapter;
 import com.example.kitowcy.letsplaykrakow.R;
+import com.example.kitowcy.letsplaykrakow.data.PlaceCreator;
+import com.example.kitowcy.letsplaykrakow.beacon.KontaktBeaconService;
 import com.example.kitowcy.letsplaykrakow.location.LocationRequestBuilder;
 import com.example.kitowcy.letsplaykrakow.location.LocationService;
 
@@ -53,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         instance = this;
 
+        PlaceCreator.load(this);
+
         setContentView(R.layout.activity_main_material);
         setupDrawer();
 
@@ -60,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         showSplashFragment();
-
         setupLocationService();
+        startBeaconService();
     }
 
     private void setupLocationService() {
@@ -132,6 +136,13 @@ public class MainActivity extends AppCompatActivity {
         }
         Log.d(TAG, "isMyServiceRunning " + isRunning);
         return isRunning;
+    }
+
+    private void startBeaconService() {
+        Log.d(TAG, "startBeaconService() called with: " + "");
+
+        Intent intent = new Intent(this, KontaktBeaconService.class);
+        startService(intent);
     }
 
     private void setupDrawer() {
