@@ -12,15 +12,13 @@
     <!--android:layout_marginRight="10dp"-->
     <!--android:src="@drawable/kolanko1" >-->
 
-    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/item_image"
+
+    <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/kolanko1"
-        app:civ_border_color="#FF000000"
-        app:civ_border_width="2dp" />
-
+        android:id="@+id/item_image" />
 
     <TextView
         android:id="@+id/item_text"
@@ -31,6 +29,6 @@
         android:layout_marginTop="5dp"
         android:paddingBottom="2sp"
         android:text="text"
-        android:textSize="15sp"/>
+        android:textSize="10sp"/>
 
 </RelativeLayout>
