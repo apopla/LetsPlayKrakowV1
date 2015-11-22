@@ -57,7 +57,7 @@ public class GridViewFragment extends Fragment {
                 for (Place place : realmResults) {
                     //// FIXME: 22.11.15
                     boolean isUnlocked = place.isSeen();
-                    int resource = isUnlocked ? place.getImageResourceId() : place.getBlockedImageRecourceId();
+                    int resource = isUnlocked ? place.getCircleImageRecourceId() : place.getBlockedImageRecourceId();
                     gridArray.add(new Pair<>(resource, place.getName()));
                 }
             }

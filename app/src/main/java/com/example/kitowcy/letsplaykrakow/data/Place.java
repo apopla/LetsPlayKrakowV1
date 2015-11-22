@@ -22,6 +22,7 @@ public class Place extends RealmObject {
     private boolean isSeen;
     private boolean isBlocked;
     private int blockedImageRecourceId;
+    private int circleImageRecourceId;
 
 
     public String getBeaconName() {
@@ -129,5 +130,13 @@ public class Place extends RealmObject {
 
     public void setBlockedImageRecourceId(int blockedImageRecourceId) {
         this.blockedImageRecourceId = blockedImageRecourceId;
+    }
+
+    public int getCircleImageRecourceId() {
+        return circleImageRecourceId;
+    }
+
+    public void setCircleImageRecourceId(int circleImageRecourceId) {
+        this.circleImageRecourceId = circleImageRecourceId;
     }
 }

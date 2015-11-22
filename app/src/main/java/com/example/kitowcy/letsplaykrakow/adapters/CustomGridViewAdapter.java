@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kitowcy.letsplaykrakow.R;
@@ -46,7 +47,7 @@ public class CustomGridViewAdapter extends ArrayAdapter<Pair<Integer, String>> {
 
             holder = new RecordHolder();
             holder.txtTitle = (TextView) row.findViewById(R.id.item_text);
-            holder.imageItem = (CircleImageView) row.findViewById(R.id.item_image);
+            holder.imageItem = (ImageView) row.findViewById(R.id.item_image);
             row.setTag(holder);
         } else {
             holder = (RecordHolder) row.getTag();
@@ -60,6 +61,6 @@ public class CustomGridViewAdapter extends ArrayAdapter<Pair<Integer, String>> {
 
     static class RecordHolder {
         TextView txtTitle;
-        CircleImageView imageItem;
+        ImageView imageItem;
     }
 }
