@@ -19,7 +19,23 @@ public class FilterDialogBuilder {
     public interface OnRefreshListener {
         void onRefresh(FilterBuilder currentFilter);
     }
+    public static void buildNotification(Context context){
+        final Dialog dialog = new Dialog(context);
+        dialog.setTitle("Filter places");
 
+        dialog.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE);
+        //this makes cardView look
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setContentView(R.layout.dialog_validate);
+        dialog.findViewById(R.id.OK).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+
+    }
     public static void build(final Context context, final FilterBuilder currentFilter, final OnRefreshListener listener) {
         Log.d("FilterDialogBuilder", "build ");
         final Dialog dialog = new Dialog(context);
