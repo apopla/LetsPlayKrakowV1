@@ -19,6 +19,10 @@ public class Place extends RealmObject {
     private int imageResourceId;
     private boolean letsPlayKrakow;
     private String beaconName;
+    private boolean isSeen;
+    private boolean isBlocked;
+    private int blockedImageRecourceId;
+
 
     public String getBeaconName() {
         return beaconName;
@@ -101,5 +105,29 @@ public class Place extends RealmObject {
 
     public void setLetsPlayKrakow(boolean letsPlayKrakow) {
         this.letsPlayKrakow = letsPlayKrakow;
+    }
+
+    public boolean isSeen() {
+        return isSeen;
+    }
+
+    public void setIsSeen(boolean isSeen) {
+        this.isSeen = isSeen;
+    }
+
+    public boolean isBlocked() {
+        return isBlocked;
+    }
+
+    public void setIsBlocked(boolean isBlocked) {
+        this.isBlocked = isBlocked;
+    }
+
+    public int getBlockedImageRecourceId() {
+        return blockedImageRecourceId;
+    }
+
+    public void setBlockedImageRecourceId(int blockedImageRecourceId) {
+        this.blockedImageRecourceId = blockedImageRecourceId;
     }
 }

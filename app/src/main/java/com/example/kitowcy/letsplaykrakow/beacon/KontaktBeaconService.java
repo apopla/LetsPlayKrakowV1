@@ -157,10 +157,7 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
 
         switch(event.getEventType()) {
 
-            case DEVICE_DISCOVERED: {
-
-            }
-            break;
+            case DEVICE_DISCOVERED:
 
             case DEVICES_UPDATE: {
 
@@ -176,8 +173,8 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
                     intent.putExtra("DESCRIPTION", place.getDescription());
                     intent.putExtra("IMAGE_RES", place.getImageResourceId());
                     intent.putExtra("PLAY", place.isLetsPlayKrakow());
+                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     getApplicationContext().startActivity(intent);
-
                 }
             }
             break;
