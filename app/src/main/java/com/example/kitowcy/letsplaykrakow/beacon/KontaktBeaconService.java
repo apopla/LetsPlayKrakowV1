@@ -1,6 +1,10 @@
 package com.example.kitowcy.letsplaykrakow.beacon;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -24,6 +28,7 @@ import com.kontakt.sdk.android.ble.filter.ibeacon.IBeaconFilter;
 import com.kontakt.sdk.android.ble.filter.ibeacon.IBeaconFilters;
 import com.kontakt.sdk.android.ble.manager.ProximityManager;
 import com.kontakt.sdk.android.common.profile.IBeaconDevice;
+import com.proxama.tappoint.auth.Authentication;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -43,8 +48,8 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
     private static final String AREK_BLACK_BEACON_UNIQUE_UUID = "Sgwx";
     private static final String AREK_WHITE_BEACON_UNIQUE_UUID = "cIKQ";
 
-    private static final int BEACON_MONITORING_TIME = 5;
-    private static final int BEACON_RANGING_TIME = 3;
+    private static final int BEACON_MONITORING_TIME = 3;
+    private static final int BEACON_RANGING_TIME = 2;
 
     private ProximityManager beaconManager;
     private List<IBeaconFilter> filteredBeaconList;
@@ -157,8 +162,6 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
 
         switch(event.getEventType()) {
 
-            case DEVICE_DISCOVERED:
-
             case DEVICES_UPDATE: {
 
                 for (IBeaconDevice beaconDevice : iBeaconDeviceEvent.getDeviceList()) {
@@ -173,19 +176,37 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
                         place.setIsSeen(true);
                         realm.copyToRealmOrUpdate(place);
                         realm.commitTransaction();
-                        Intent intent = new Intent(getApplicationContext(), PlaceActivity.class);
-                        intent.putExtra("NAME", place.getName());
-                        intent.putExtra("DESCRIPTION", place.getDescription());
-                        intent.putExtra("IMAGE_RES", place.getImageResourceId());
-                        intent.putExtra("PLAY", place.isLetsPlayKrakow());
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        getApplicationContext().startActivity(intent);
+
+                        showNotification(place);
                     }
                 }
             }
             break;
-
-
         }
     }
+
+    public void showNotification(Place place) {
+        Intent intent = new Intent(getApplicationContext(), PlaceActivity.class);
+        intent.putExtra("NAME", place.getName());
+        intent.putExtra("DESCRIPTION", place.getDescription());
+        intent.putExtra("IMAGE_RES", place.getImageResourceId());
+        intent.putExtra("PLAY", place.isLetsPlayKrakow());
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivities(this, 0,
+                new Intent[] { intent }, PendingIntent.FLAG_UPDATE_CURRENT);
+        Notification notification = new Notification.Builder(this)
+                .setSmallIcon(android.R.drawable.ic_dialog_info)
+                .setContentTitle("You reach " + place.getName() + "!")
+                .setContentText(place.getDescription())
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .build();
+        notification.defaults |= Notification.DEFAULT_SOUND;
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, notification);
+    }
+
 }

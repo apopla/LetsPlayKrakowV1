@@ -3,29 +3,21 @@ package com.example.kitowcy.letsplaykrakow.entities.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.kitowcy.letsplaykrakow.R;
-import com.example.kitowcy.letsplaykrakow.adapters.CustomGridViewAdapter;
-import com.example.kitowcy.letsplaykrakow.data.Place;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import io.realm.Realm;
-import io.realm.RealmResults;
+import com.example.kitowcy.letsplaykrakow.entities.MainActivity;
 
 public class RoutesFragment extends Fragment {
 
     private static final String TAG = RoutesFragment.class.getSimpleName();
 
     private RelativeLayout layoutOsemka;
+    private MainActivity parentActivity;
 
     public static RoutesFragment newInstance() {
         RoutesFragment fragment = new RoutesFragment();
@@ -54,6 +46,11 @@ public class RoutesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Osemeczka jedzie", Toast.LENGTH_SHORT).show();
+
+                parentActivity.getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.activity_main_fragment_placeholder,
+                                GoogleMapFragment.newInstance(8))
+                        .commitAllowingStateLoss();
             }
         });
 
@@ -63,6 +60,7 @@ public class RoutesFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        parentActivity = (MainActivity) activity;
     }
 
     @Override
