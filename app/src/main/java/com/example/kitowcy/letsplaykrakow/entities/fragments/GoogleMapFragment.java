@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
@@ -206,6 +207,17 @@ public class GoogleMapFragment extends Fragment {
                             drawMarkers(map);
                         }
                         updateMarker(LocationData.getCurrentPosition());
+                        map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+                            @Override
+                            public void onMapLongClick(LatLng latLng) {
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        FilterDialogBuilder.buildNotification(getActivity());
+                                    }
+                                }, 5000);
+                            }
+                        });
                     }
                 }
 
@@ -216,7 +228,7 @@ public class GoogleMapFragment extends Fragment {
 
     private void drawBusStops() {
         Realm realm = Realm.getInstance(getActivity());
-        Line line = realm.where(Line.class).equalTo("name",8).findFirst();
+        Line line = realm.where(Line.class).equalTo("name",lineNumber).findFirst();
 
         //todo: drawing stops goes here
         RealmResults<Place> nearbyPlaces = realm.where(Place.class).findAll();

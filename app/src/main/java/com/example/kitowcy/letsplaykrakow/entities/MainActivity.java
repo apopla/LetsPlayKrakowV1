@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Messenger;
+import android.os.PowerManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,13 +26,13 @@ import com.example.kitowcy.letsplaykrakow.FragmentSwitcher;
 import com.example.kitowcy.letsplaykrakow.FragmentUnit;
 import com.example.kitowcy.letsplaykrakow.MaterialDrawerAdapter;
 import com.example.kitowcy.letsplaykrakow.R;
-import com.example.kitowcy.letsplaykrakow.tappoint.TapPointService;
 import com.example.kitowcy.letsplaykrakow.beacon.KontaktBeaconService;
 import com.example.kitowcy.letsplaykrakow.data.PlaceCreator;
 import com.example.kitowcy.letsplaykrakow.entities.fragments.GoogleMapFragment;
 import com.example.kitowcy.letsplaykrakow.entities.fragments.PlacesFragment;
 import com.example.kitowcy.letsplaykrakow.location.LocationRequestBuilder;
 import com.example.kitowcy.letsplaykrakow.location.LocationService;
+import com.example.kitowcy.letsplaykrakow.tappoint.TapPointService;
 
 public class MainActivity extends AppCompatActivity {
     private static MainActivity instance;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     public static int currentFragmentDisplayedId;
 
+    private PowerManager.WakeLock wakeLock;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +86,18 @@ public class MainActivity extends AppCompatActivity {
 
         bundle.putSerializable("LOCATION_REQUEST_BUILDER", locationRequestBuilder);
         startServiceWithBundle(bundle);
+        acquireWakeLock();
+    }
+    private void acquireWakeLock() {
+        Log.d(TAG, "acquireWakeLock ");
+        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        wakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag");
+        wakeLock.acquire();
+    }
+
+    private void releaseWakeLock() {
+        Log.d(TAG, "releaseWakeLock ");
+        wakeLock.release();
     }
 
     public void startServiceWithBundle(Bundle bundle) {
@@ -108,9 +122,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         Log.d(TAG, "onDestroy ");
+        releaseWakeLock();
         LocationService.stop();
+        super.onDestroy();
     }
 
     private void showSplashFragment() {
@@ -233,5 +248,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 }
