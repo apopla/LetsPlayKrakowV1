@@ -4,9 +4,7 @@ import android.app.ActionBar;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Messenger;
@@ -22,12 +20,14 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.kitowcy.letsplaykrakow.AdapterCreator;
+import com.example.kitowcy.letsplaykrakow.Constants;
 import com.example.kitowcy.letsplaykrakow.FragmentSwitcher;
 import com.example.kitowcy.letsplaykrakow.FragmentUnit;
 import com.example.kitowcy.letsplaykrakow.MaterialDrawerAdapter;
 import com.example.kitowcy.letsplaykrakow.R;
-import com.example.kitowcy.letsplaykrakow.data.PlaceCreator;
 import com.example.kitowcy.letsplaykrakow.beacon.KontaktBeaconService;
+import com.example.kitowcy.letsplaykrakow.data.PlaceCreator;
+import com.example.kitowcy.letsplaykrakow.entities.fragments.GoogleMapFragment;
 import com.example.kitowcy.letsplaykrakow.location.LocationRequestBuilder;
 import com.example.kitowcy.letsplaykrakow.location.LocationService;
 
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (getActionBar() == null){
+        if (getActionBar() == null) {
             Log.d(TAG, "onCreate: action bar tez null :(");
         } else {
             Log.d(TAG, "onCreate: action bar nie jest null!! :)");
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         LocationService.stop();
     }
 
-    private void showSplashFragment(){
+    private void showSplashFragment() {
         FragmentSwitcher.switchToFragment(this, FragmentUnit.SPLASH, R.id.activity_main_fragment_placeholder, null);
 
         Handler handler = new Handler();
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void showMapFragment(){
+    private void showMapFragment() {
 
         FragmentSwitcher.switchToFragment(this, FragmentUnit.MAP, R.id.activity_main_fragment_placeholder, null);
 
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.syncState();
 
         ActionBar actionBar = getActionBar();
-        if (actionBar==null){
+        if (actionBar == null) {
             Log.d(TAG, "action bar is null :(");
         } else {
             Log.d(TAG, "action bar is not null!!! :)");
@@ -195,24 +195,28 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_map, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.filter) {
+            if (currentFragmentDisplayedId == Constants.MAP) {
+                if (GoogleMapFragment.instance != null)
+                    GoogleMapFragment.instance.setupFilterDialog();
+            }
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

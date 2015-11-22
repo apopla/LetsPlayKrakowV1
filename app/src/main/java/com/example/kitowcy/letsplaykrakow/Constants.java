@@ -9,10 +9,12 @@ public class Constants {
 
     public static final int LOCATION_UPDATE_INTERVAL = 4000;
     public static final int LOCATION_UPDATE_FASTEST_INTERVAL = 2000;
-   /* * Location constants
-    */
+    /* * Location constants
+     */
     public static final String LOCATION_UPDATE_BROADCAST = "LOCATION_UPDATE_BROADCAST";
     public static final String STOPS_UPDATE_BROADCAST = "STOPS_UPDATE_BROADCAST";
     public static final String LOCATION_UPDATE_KEY = "LOCATION";
+
+    public static final int MAP = 2000;
 
 }
