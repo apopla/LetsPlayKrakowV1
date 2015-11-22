@@ -100,6 +100,7 @@ public class PlaceCreator {
         alchemiaPlace.setName(alchemiaName);
         alchemiaPlace.setCategory(context.getResources().getString(R.string.fun_category));
         alchemiaPlace.setImageResourceId(R.drawable.alchemia);
+        alchemiaPlace.setBlockedImageRecourceId(R.drawable.alchemia1);
         alchemiaPlace.setDescription(alchemiaDescription);
         alchemiaPlace.setAddress(alchemiaAddress);
         alchemiaPlace.setLatitude(alchemiaLat);
@@ -112,6 +113,7 @@ public class PlaceCreator {
         kolankoPlace.setName(kolankoName);
         kolankoPlace.setCategory(context.getResources().getString(R.string.food_category));
         kolankoPlace.setImageResourceId(R.drawable.kolanko);
+        kolankoPlace.setBlockedImageRecourceId(R.drawable.kolanko1);
         kolankoPlace.setDescription(kolankoDescription);
         kolankoPlace.setAddress(kolankoAddress);
         kolankoPlace.setLatitude(kolankoLat);
@@ -124,6 +126,7 @@ public class PlaceCreator {
         staraSynagogaPlace.setName(staraSynagogaName);
         staraSynagogaPlace.setCategory(context.getResources().getString(R.string.monument_category));
         staraSynagogaPlace.setImageResourceId(R.drawable.synagoga);
+        staraSynagogaPlace.setBlockedImageRecourceId(R.drawable.synagoga1);
         staraSynagogaPlace.setDescription(staraSynagogaDescription);
         staraSynagogaPlace.setAddress(staraSynagogaAddress);
         staraSynagogaPlace.setLatitude(staraSynagogaLat);
@@ -136,6 +139,7 @@ public class PlaceCreator {
         alchemiaPlace.setIsSeen(false);
         pierozkiPlace.setCategory(context.getResources().getString(R.string.food_category));
         pierozkiPlace.setImageResourceId(R.drawable.vincent);
+        pierozkiPlace.setBlockedImageRecourceId(R.drawable.vincent);
         pierozkiPlace.setDescription(pierozkiDescription);
         pierozkiPlace.setAddress(pierozkiAddress);
         pierozkiPlace.setLatitude(pierozkiLat);
@@ -148,6 +152,7 @@ public class PlaceCreator {
         alchemiaPlace.setIsSeen(false);
         singerPlace.setCategory(context.getResources().getString(R.string.fun_category));
         singerPlace.setImageResourceId(R.drawable.singer);
+        singerPlace.setBlockedImageRecourceId(R.drawable.singer);
         singerPlace.setDescription(singerDescription);
         singerPlace.setAddress(singerAddress);
         singerPlace.setLatitude(singerLat);
@@ -160,6 +165,7 @@ public class PlaceCreator {
         alchemiaPlace.setIsSeen(false);
         paulitePlace.setCategory(context.getResources().getString(R.string.monument_category));
         paulitePlace.setImageResourceId(R.drawable.paulini);
+        paulitePlace.setBlockedImageRecourceId(R.drawable.paulini);
         paulitePlace.setDescription(pauliteDescription);
         paulitePlace.setAddress(pauliteAddress);
         paulitePlace.setLatitude(pauliteLat);
@@ -172,6 +178,7 @@ public class PlaceCreator {
         alchemiaPlace.setIsSeen(false);
         flowerPlace.setCategory(context.getResources().getString(R.string.fun_category));
         flowerPlace.setImageResourceId(R.drawable.flower);
+        flowerPlace.setBlockedImageRecourceId(R.drawable.flower);
         flowerPlace.setDescription(flowerPowerDescription);
         flowerPlace.setAddress(flowerPowerAddress);
         flowerPlace.setLatitude(flowerPowerLat);
@@ -184,6 +191,7 @@ public class PlaceCreator {
         alchemiaPlace.setIsSeen(false);
         omertaPlace.setCategory(context.getResources().getString(R.string.fun_category));
         omertaPlace.setImageResourceId(R.drawable.godfather);
+        omertaPlace.setBlockedImageRecourceId(R.drawable.godfather);
         omertaPlace.setDescription(omertaDescription);
         omertaPlace.setAddress(omertaAddress);
         omertaPlace.setLatitude(omertaLat);
@@ -196,6 +204,7 @@ public class PlaceCreator {
         alchemiaPlace.setIsSeen(false);
         corpusPlace.setCategory(context.getResources().getString(R.string.monument_category));
         corpusPlace.setImageResourceId(R.drawable.bozegociala);
+        corpusPlace.setBlockedImageRecourceId(R.drawable.bozegociala);
         corpusPlace.setDescription(corpusChristiDescription);
         corpusPlace.setAddress(corpusChristiAddress);
         corpusPlace.setLatitude(corpusChristiLat);
@@ -208,6 +217,7 @@ public class PlaceCreator {
         alchemiaPlace.setIsSeen(false);
         sasiedziPlace.setCategory(context.getResources().getString(R.string.food_category));
         sasiedziPlace.setImageResourceId(R.drawable.sasiedzi);
+        sasiedziPlace.setBlockedImageRecourceId(R.drawable.sasiedzi);
         sasiedziPlace.setDescription(sasiedziDescription);
         sasiedziPlace.setAddress(sasiedziAddress);
         sasiedziPlace.setLatitude(sasiedziLat);
@@ -220,6 +230,7 @@ public class PlaceCreator {
         alchemiaPlace.setIsSeen(false);
         remuhPlace.setCategory(context.getResources().getString(R.string.monument_category));
         remuhPlace.setImageResourceId(R.drawable.remuh);
+        remuhPlace.setBlockedImageRecourceId(R.drawable.remuh);
         remuhPlace.setDescription(remuhDescription);
         remuhPlace.setAddress(remuhAddress);
         remuhPlace.setLatitude(remuhLat);
@@ -232,6 +243,7 @@ public class PlaceCreator {
         alchemiaPlace.setIsSeen(false);
         isaacPlace.setCategory(context.getResources().getString(R.string.monument_category));
         isaacPlace.setImageResourceId(R.drawable.isaac);
+        isaacPlace.setBlockedImageRecourceId(R.drawable.isaac);
         isaacPlace.setDescription(isaacDescription);
         isaacPlace.setAddress(isaacAddress);
         isaacPlace.setLatitude(isaacLat);
