@@ -1,21 +1,124 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
     tools:context="com.example.kitowcy.letsplaykrakow.entities.fragments.PlacesFragment">
+
+    <ImageView
+        android:id="@+id/tram"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:src="@drawable/tram"/>
+
+    <View
+        android:layout_below="@id/tram"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark" />
 
     <RelativeLayout
         android:id="@+id/layout_osemka"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="100dp"
+        android:layout_below="@id/tram"
+        android:paddingStart="5dp">
+
+        <ImageView
+            android:id="@+id/place_image"
+            android:layout_width="80sp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:layout_centerVertical="true"
+            android:src="@drawable/osiem" />
 
         <TextView
+            android:id="@+id/text_from"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="8"
-            android:textSize="26sp"/>
+            android:layout_toRightOf="@+id/place_image"
+            android:padding="16sp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/black"
+            android:text="Borek Fałęcki" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/line_arrow"
+            android:layout_alignBottom="@+id/text_from"
+            android:layout_toEndOf="@+id/text_from" />
+
+        <TextView
+            android:id="@+id/text_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="16dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/black"
+            android:text="Bronowice Małe"
+            android:layout_alignBottom="@+id/place_image"
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
 
-</FrameLayout>
+    <View
+        android:id="@+id/middle_view"
+        android:layout_below="@id/layout_osemka"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark" />
+
+    <RelativeLayout
+        android:id="@+id/layout_dwadziescia"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/middle_view"
+        android:paddingStart="5dp">
+
+        <ImageView
+            android:id="@+id/place_image_dwa"
+            android:layout_width="80sp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:layout_centerVertical="true"
+            android:src="@drawable/dwadziesciacztery" />
+
+        <TextView
+            android:id="@+id/text_from_dwa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/place_image_dwa"
+            android:padding="16sp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/black"
+            android:text="Kurdwanów" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/line_arrow"
+            android:layout_alignBottom="@+id/text_from_dwa"
+            android:layout_toEndOf="@+id/text_from_dwa" />
+
+        <TextView
+            android:id="@+id/text_to_dwa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="16dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/black"
+            android:text="Bronowice Małe"
+            android:layout_alignBottom="@+id/place_image_dwa"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_below="@id/layout_dwadziescia"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark" />
+
+</RelativeLayout>

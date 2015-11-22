@@ -25,7 +25,7 @@ public class RoutesFragment extends Fragment {
 
     private static final String TAG = RoutesFragment.class.getSimpleName();
 
-    private RelativeLayout layoutOsemka;
+    private RelativeLayout layoutOsemka, layoutDwadziescia;
 
     public static RoutesFragment newInstance() {
         RoutesFragment fragment = new RoutesFragment();
@@ -49,11 +49,12 @@ public class RoutesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_routes, container, false);
 
         layoutOsemka = (RelativeLayout) view.findViewById(R.id.layout_osemka);
+        layoutDwadziescia = (RelativeLayout) view.findViewById(R.id.layout_dwadziescia);
 
         layoutOsemka.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Osemeczka jedzie", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Osemeczka jedzie", Toast.LENGTH_SHORT).show();
             }
         });
 
