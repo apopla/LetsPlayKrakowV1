@@ -28,6 +28,7 @@ import com.example.kitowcy.letsplaykrakow.R;
 import com.example.kitowcy.letsplaykrakow.beacon.KontaktBeaconService;
 import com.example.kitowcy.letsplaykrakow.data.PlaceCreator;
 import com.example.kitowcy.letsplaykrakow.entities.fragments.GoogleMapFragment;
+import com.example.kitowcy.letsplaykrakow.entities.fragments.PlacesFragment;
 import com.example.kitowcy.letsplaykrakow.location.LocationRequestBuilder;
 import com.example.kitowcy.letsplaykrakow.location.LocationService;
 
@@ -214,8 +215,11 @@ public class MainActivity extends AppCompatActivity {
             if (currentFragmentDisplayedId == Constants.MAP) {
                 if (GoogleMapFragment.instance != null)
                     GoogleMapFragment.instance.setupFilterDialog();
+            }else if(currentFragmentDisplayedId == Constants.PLACES) {
+                if (PlacesFragment.instance != null)
+                    PlacesFragment.instance.setupFilterDialog();
             }
-            return true;
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
