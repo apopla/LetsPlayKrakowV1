@@ -47,7 +47,7 @@ public class RoutesFragment extends Fragment {
         layoutOsemka.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Osemeczka jedzie", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Osemeczka jedzie", Toast.LENGTH_SHORT).show();
 
                 parentActivity.getSupportFragmentManager().beginTransaction()
                         .replace(R.id.activity_main_fragment_placeholder,
@@ -62,7 +62,7 @@ public class RoutesFragment extends Fragment {
         layout24.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "24 jedzie", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "24 jedzie", Toast.LENGTH_SHORT).show();
 
                 parentActivity.getSupportFragmentManager().beginTransaction()
                         .replace(R.id.activity_main_fragment_placeholder,

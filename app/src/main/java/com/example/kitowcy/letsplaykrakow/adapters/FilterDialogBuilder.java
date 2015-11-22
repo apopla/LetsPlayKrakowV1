@@ -11,7 +11,10 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.kitowcy.letsplaykrakow.R;
+import com.example.kitowcy.letsplaykrakow.data.Place;
 import com.example.kitowcy.letsplaykrakow.entities.MainActivity;
+
+import io.realm.Realm;
 
 /**
  * Created by lukasz on 22.11.15.
@@ -20,7 +23,7 @@ public class FilterDialogBuilder {
     public interface OnRefreshListener {
         void onRefresh(FilterBuilder currentFilter);
     }
-    public static void buildNotification(Context context){
+    public static void buildNotification(final Context context){
         final Dialog dialog = new Dialog(MainActivity.getInstance());
 //        dialog.setTitle("Filter places");
 
@@ -31,6 +34,17 @@ public class FilterDialogBuilder {
         dialog.findViewById(R.id.OK).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Realm realm = Realm.getInstance(context);
+                    Place place = realm.where(Place.class).equalTo("UUID", "Sgwx").findFirst();
+                    if(!place.isSeen()) {
+                        realm.beginTransaction();
+                        place.setIsSeen(true);
+                        realm.copyToRealmOrUpdate(place);
+                        realm.commitTransaction();
+                    }
+
+
                 dialog.dismiss();
             }
         });
