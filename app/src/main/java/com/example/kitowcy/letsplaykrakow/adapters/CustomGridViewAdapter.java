@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kitowcy.letsplaykrakow.R;
@@ -17,6 +16,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * @author manish.s
@@ -45,7 +46,7 @@ public class CustomGridViewAdapter extends ArrayAdapter<Pair<Integer, String>> {
 
             holder = new RecordHolder();
             holder.txtTitle = (TextView) row.findViewById(R.id.item_text);
-            holder.imageItem = (ImageView) row.findViewById(R.id.item_image);
+            holder.imageItem = (CircleImageView) row.findViewById(R.id.item_image);
             row.setTag(holder);
         } else {
             holder = (RecordHolder) row.getTag();
@@ -55,12 +56,10 @@ public class CustomGridViewAdapter extends ArrayAdapter<Pair<Integer, String>> {
         holder.txtTitle.setText(item.second);
         Picasso.with(context).load(item.first).into(holder.imageItem);
         return row;
-
     }
 
     static class RecordHolder {
         TextView txtTitle;
-        ImageView imageItem;
-
+        CircleImageView imageItem;
     }
 }
