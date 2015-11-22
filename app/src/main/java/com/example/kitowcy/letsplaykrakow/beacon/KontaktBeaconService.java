@@ -36,8 +36,8 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
     private static final String AREK_BLACK_BEACON_UNIQUE_UUID = "Sgwx";
     private static final String AREK_WHITE_BEACON_UNIQUE_UUID = "cIKQ";
 
-    private static final int BEACON_MONITORING_TIME = 5;
-    private static final int BEACON_RANGING_TIME = 3;
+    private static final int BEACON_MONITORING_TIME = 3;
+    private static final int BEACON_RANGING_TIME = 2;
 
     private ProximityManager beaconManager;
     private List<IBeaconFilter> filteredBeaconList;
@@ -150,11 +150,6 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
 
         switch(event.getEventType()) {
 
-            case DEVICE_DISCOVERED: {
-
-            }
-            break;
-
             case DEVICES_UPDATE: {
 
                 for (IBeaconDevice beaconDevice : iBeaconDeviceEvent.getDeviceList()) {
@@ -165,8 +160,6 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
                 }
             }
             break;
-
-
         }
     }
 }
