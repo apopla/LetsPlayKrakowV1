@@ -12,26 +12,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.kitowcy.letsplaykrakow.R;
 import com.example.kitowcy.letsplaykrakow.entities.MainActivity;
 import com.squareup.picasso.Picasso;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class PlaceActivity extends AppCompatActivity {
     public static final String TAG = PlaceActivity.class.getSimpleName();
-    @Bind(R.id.collapsing_toolbar)
+
     public CollapsingToolbarLayout collapsingToolbarLayout;
 
-    @Bind(R.id.scroll)
     public NestedScrollView nestedScrollView;
-
-    @Bind(R.id.image)
+    public TextView placeDescription;
     public ImageView imageView;
-
-
+    public android.support.v7.widget.Toolbar toolbar;
     private String name, descrption;
     private boolean play;
     private int imageRes;
@@ -41,7 +37,8 @@ public class PlaceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate ");
         setContentView(R.layout.activity_display_place);
-        ButterKnife.bind(this);
+
+        injectViews();
 
         Intent intent = getIntent();
         name = intent.getStringExtra("NAME");
@@ -49,6 +46,22 @@ public class PlaceActivity extends AppCompatActivity {
         imageRes = intent.getIntExtra("IMAGE_RES", R.drawable.menu_header);
         play = intent.getBooleanExtra("PLAY", false);
         Picasso.with(this).load(imageRes).into(imageView);
+        placeDescription.setText(descrption);
+
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setTitle(name);
+        }
+    }
+
+    private void injectViews() {
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        nestedScrollView = (NestedScrollView) findViewById(R.id.scroll);
+        imageView = (ImageView) findViewById(R.id.image);
+        placeDescription = (TextView) findViewById(R.id.place_description);
+        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
     }
 
     @Override

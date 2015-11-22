@@ -38,7 +38,7 @@ public class FragmentSwitcher {
                 selectedFragment.setArguments(bundle);
                 transaction.replace(placeHolderResource, selectedFragment);
                 transaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left);
-                transaction.commit();
+                transaction.commitAllowingStateLoss();
 
                 if (activity.getSupportActionBar() != null)
                     activity.getSupportActionBar().setElevation(0);
@@ -67,7 +67,7 @@ public class FragmentSwitcher {
                 activity.getSupportFragmentManager()
                         .beginTransaction()
                         .add(placeHolderResource, fragment, "TAG")
-                        .commit();
+                        .commitAllowingStateLoss();
             }
         }
     }
