@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 
 import com.example.kitowcy.letsplaykrakow.entities.fragments.AchievementsFragment;
 import com.example.kitowcy.letsplaykrakow.entities.fragments.GoogleMapFragment;
+import com.example.kitowcy.letsplaykrakow.entities.fragments.GridViewFragment;
 import com.example.kitowcy.letsplaykrakow.entities.fragments.PlacesFragment;
 import com.example.kitowcy.letsplaykrakow.entities.fragments.SchematFragment;
 import com.example.kitowcy.letsplaykrakow.entities.fragments.StartFragment;
@@ -15,7 +16,10 @@ public enum FragmentUnit {
     MAP(0, GoogleMapFragment.class),
     ROUTES(1, StartFragment.class),
     ACHIEVEMENTS(2, AchievementsFragment.class),
-    PLACES(3, PlacesFragment.class);
+    RECYCLER(3, GridViewFragment.class),
+
+    PLACES(4, PlacesFragment.class);
+
 
     /**
      * Subclass of base Fragment class
