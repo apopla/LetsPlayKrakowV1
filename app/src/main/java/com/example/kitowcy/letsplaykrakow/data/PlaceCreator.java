@@ -149,6 +149,17 @@ public class PlaceCreator {
         singerPlace.setLongitude(singerLng);
         singerPlace.setLetsPlayKrakow(false);
 
+        Place paulitePlace = realm.createObject(Place.class);
+        paulitePlace.setUUID(UUID.randomUUID().toString());
+        paulitePlace.setName(pauliteName);
+        paulitePlace.setCategory(context.getResources().getString(R.string.monument_category));
+        paulitePlace.setImageResourceId(R.drawable.paulini);
+        paulitePlace.setDescription(pauliteDescription);
+        paulitePlace.setAddress(pauliteAddress);
+        paulitePlace.setLatitude(pauliteLat);
+        paulitePlace.setLongitude(pauliteLng);
+        paulitePlace.setLetsPlayKrakow(true);
+
         Place flowerPlace = realm.createObject(Place.class);
         flowerPlace.setUUID(UUID.randomUUID().toString());
         flowerPlace.setName(flowerPowerName);
@@ -170,6 +181,17 @@ public class PlaceCreator {
         omertaPlace.setLatitude(omertaLat);
         omertaPlace.setLongitude(omertaLng);
         omertaPlace.setLetsPlayKrakow(false);
+
+        Place corpusPlace = realm.createObject(Place.class);
+        corpusPlace.setUUID(UUID.randomUUID().toString());
+        corpusPlace.setName(corpusChristiName);
+        corpusPlace.setCategory(context.getResources().getString(R.string.monument_category));
+        corpusPlace.setImageResourceId(R.drawable.bozegociala);
+        corpusPlace.setDescription(corpusChristiDescription);
+        corpusPlace.setAddress(corpusChristiAddress);
+        corpusPlace.setLatitude(corpusChristiLat);
+        corpusPlace.setLongitude(corpusChristiLng);
+        corpusPlace.setLetsPlayKrakow(true);
 
         Place sasiedziPlace = realm.createObject(Place.class);
         sasiedziPlace.setUUID(UUID.randomUUID().toString());
@@ -203,28 +225,6 @@ public class PlaceCreator {
         isaacPlace.setLatitude(isaacLat);
         isaacPlace.setLongitude(isaacLng);
         isaacPlace.setLetsPlayKrakow(true);
-
-        Place corpusPlace = realm.createObject(Place.class);
-        corpusPlace.setUUID(UUID.randomUUID().toString());
-        corpusPlace.setName(corpusChristiName);
-        corpusPlace.setCategory(context.getResources().getString(R.string.monument_category));
-        corpusPlace.setImageResourceId(R.drawable.bozegociala);
-        corpusPlace.setDescription(corpusChristiDescription);
-        corpusPlace.setAddress(corpusChristiAddress);
-        corpusPlace.setLatitude(corpusChristiLat);
-        corpusPlace.setLongitude(corpusChristiLng);
-        corpusPlace.setLetsPlayKrakow(true);
-
-        Place paulitePlace = realm.createObject(Place.class);
-        paulitePlace.setUUID(UUID.randomUUID().toString());
-        paulitePlace.setName(pauliteName);
-        paulitePlace.setCategory(context.getResources().getString(R.string.monument_category));
-        paulitePlace.setImageResourceId(R.drawable.paulini);
-        paulitePlace.setDescription(pauliteDescription);
-        paulitePlace.setAddress(pauliteAddress);
-        paulitePlace.setLatitude(pauliteLat);
-        paulitePlace.setLongitude(pauliteLng);
-        paulitePlace.setLetsPlayKrakow(true);
 
 
         realm.commitTransaction();
