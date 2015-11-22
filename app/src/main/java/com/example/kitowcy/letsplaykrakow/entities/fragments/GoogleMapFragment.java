@@ -21,9 +21,11 @@ import android.widget.RelativeLayout;
 
 import com.example.kitowcy.letsplaykrakow.Constants;
 import com.example.kitowcy.letsplaykrakow.R;
-import com.example.kitowcy.letsplaykrakow.adapters.FilterDialogBuilder;
 import com.example.kitowcy.letsplaykrakow.adapters.FilterBuilder;
+import com.example.kitowcy.letsplaykrakow.adapters.FilterDialogBuilder;
+import com.example.kitowcy.letsplaykrakow.data.Line;
 import com.example.kitowcy.letsplaykrakow.data.Place;
+import com.example.kitowcy.letsplaykrakow.data.Stop;
 import com.example.kitowcy.letsplaykrakow.entities.MainActivity;
 import com.example.kitowcy.letsplaykrakow.location.LocationData;
 import com.google.android.gms.maps.CameraUpdate;
@@ -172,7 +174,7 @@ public class GoogleMapFragment extends Fragment {
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 17));
 //            map.animateCamera(zoom);
             map.addMarker(new MarkerOptions()
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.walking_man))
                     .position(LocationData.getCurrentPosition())
                     .title("My Location"));
             locationFound = true;
@@ -214,27 +216,28 @@ public class GoogleMapFragment extends Fragment {
 
     private void drawBusStops() {
         Realm realm = Realm.getInstance(getActivity());
-//        Line line = realm.where(Line.class).equalTo("name",8).findFirst();
+        Line line = realm.where(Line.class).equalTo("name",8).findFirst();
 
         //todo: drawing stops goes here
         RealmResults<Place> nearbyPlaces = realm.where(Place.class).findAll();
 
-//        for(Stop stop : stops){
-//
-//            map.addMarker(new MarkerOptions()
-//                    .position(new LatLng(stop.getLatitude(), stop.getLongitude()))
-//                    .title(place.getName())
-//                    .snippet(place.getAddress())
-//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.blue_bus_stop)));
-//            for (LatLng latLng : getNearbyPlaces(nearbyPlaces,stop.getPosition)) {
-//
-//                map.addMarker(new MarkerOptions()
-//                        .position(new LatLng(place.getLatitude(), place.getLongitude()))
-//                        .title(place.getName())
-//                        .snippet(place.getAddress())
-//                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.blue_bus_stop)));
-//            }
-//        }
+        for(Stop stop : line.getStops()){
+
+            map.addMarker(new MarkerOptions()
+                    .position(new LatLng(stop.getLatitude(), stop.getLongitude()))
+                    .title(stop.getName())
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.blue_bus_stop)));
+
+            for (Place place : getNearbyPlaces(nearbyPlaces,
+                    new LatLng(stop.getLatitude(),stop.getLongitude()))) {
+
+                map.addMarker(new MarkerOptions()
+                        .position(new LatLng(place.getLatitude(), place.getLongitude()))
+                        .title(place.getName())
+                        .snippet(place.getAddress())
+                        .icon(BitmapDescriptorFactory.fromResource(getCategorizedResource(place.getCategory()))));
+            }
+        }
     }
 
     private List<Place> getNearbyPlaces(RealmResults<Place> places, LatLng selectedStop) {
@@ -252,7 +255,7 @@ public class GoogleMapFragment extends Fragment {
         double dx = p.latitude - selectedStop.latitude;
         double dy = p.longitude - selectedStop.longitude;
         double length = Math.sqrt(dx * dx + dy * dy);
-        boolean isNear = length < 0.0005;
+        boolean isNear = length < 0.0025;
         Log.d(TAG, "this poi is " + length + " far. " + (isNear ? "It is close" : "Too far"));
         return isNear;
     }

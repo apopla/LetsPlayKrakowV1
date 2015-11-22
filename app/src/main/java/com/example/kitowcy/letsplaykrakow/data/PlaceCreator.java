@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.example.kitowcy.letsplaykrakow.R;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 import io.realm.Realm;
@@ -119,6 +118,9 @@ public class PlaceCreator {
         Realm realm = Realm.getInstance(context);
         realm.beginTransaction();
         realm.where(Place.class).findAll().clear();
+        realm.where(Line.class).findAll().clear();
+        realm.where(Stop.class).findAll().clear();
+
         Place alchemiaPlace = realm.createObject(Place.class);
         alchemiaPlace.setUUID("Sgwx");
         alchemiaPlace.setIsSeen(false);
@@ -290,27 +292,40 @@ public class PlaceCreator {
         Line firstLine = realm.createObject(Line.class);
         firstLine.setName(8);
         RealmList<Stop> firstStops = new RealmList<>();
+
         Stop swGertrudyStop = realm.createObject(Stop.class);
+        swGertrudyStop.setUuid(UUID.randomUUID().toString());
         swGertrudyStop.setName("Sw. Gertrudy");
         swGertrudyStop.setLatitude(swGertrudyLat);
         swGertrudyStop.setLongitude(swGertrudyLng);
         Stop wawelStop = realm.createObject(Stop.class);
+        wawelStop.setUuid(UUID.randomUUID().toString());
+
         wawelStop.setName("Wawel");
         wawelStop.setLatitude(wawelLat);
         wawelStop.setLongitude(wawelLng);
         Stop stradomStop = realm.createObject(Stop.class);
+        stradomStop.setUuid(UUID.randomUUID().toString());
+
         stradomStop.setName("Stradom");
         stradomStop.setLatitude(stradomLat);
         stradomStop.setLongitude(stradomLng);
         Stop wolnicaStop = realm.createObject(Stop.class);
+        wolnicaStop.setUuid(UUID.randomUUID().toString());
+
         wolnicaStop.setName("Plac Wolnica");
         wolnicaStop.setLatitude(placWolnicaLat);
         wolnicaStop.setLongitude(placWolnicaLng);
+
         Stop koronaStop = realm.createObject(Stop.class);
+        koronaStop.setUuid(UUID.randomUUID().toString());
+
         koronaStop.setName("Korona");
         koronaStop.setLatitude(koronaLat);
         koronaStop.setLongitude(koronaLng);
+
         Stop smolkiStop = realm.createObject(Stop.class);
+        smolkiStop.setUuid(UUID.randomUUID().toString());
         smolkiStop.setName("Smolki");
         smolkiStop.setLatitude(smolkiLat);
         smolkiStop.setLongitude(smolkiLng);
@@ -329,26 +344,37 @@ public class PlaceCreator {
         Line secondLine = realm.createObject(Line.class);
         secondLine.setName(24);
         RealmList<Stop> secondStops = new RealmList<>();
+
         Stop pocztaStop = realm.createObject(Stop.class);
+        pocztaStop.setUuid(UUID.randomUUID().toString());
         pocztaStop.setName("Poczta Glowna");
         pocztaStop.setLatitude(pocztaLat);
         pocztaStop.setLongitude(pocztaLng);
+
         Stop starowislnaStop = realm.createObject(Stop.class);
+        starowislnaStop.setUuid(UUID.randomUUID().toString());
         starowislnaStop.setName("Starowislna");
         starowislnaStop.setLatitude(starowislnaLat);
         starowislnaStop.setLongitude(starowislnaLng);
+
         Stop miodowaStop = realm.createObject(Stop.class);
+        miodowaStop.setUuid(UUID.randomUUID().toString());
         miodowaStop.setName("Miodowa");
         miodowaStop.setLatitude(miodowaLat);
         miodowaStop.setLongitude(miodowaLng);
+
         Stop wawrzyncaStop = realm.createObject(Stop.class);
+        wawrzyncaStop.setUuid(UUID.randomUUID().toString());
         wawrzyncaStop.setName("Sw. Wawrzynca");
         wawrzyncaStop.setLatitude(wawrzyncaLat);
         wawrzyncaStop.setLongitude(wawrzyncaLng);
+
         Stop bohaterowStop = realm.createObject(Stop.class);
+        bohaterowStop.setUuid(UUID.randomUUID().toString());
         bohaterowStop.setName("Plac bohaterow getta");
         bohaterowStop.setLatitude(bohaterowLat);
         bohaterowStop.setLongitude(bohaterowLng);
+
         realm.commitTransaction();
         realm.beginTransaction();
         secondStops.add(pocztaStop);
@@ -358,6 +384,5 @@ public class PlaceCreator {
         secondStops.add(bohaterowStop);
         secondLine.setStops(secondStops);
         realm.commitTransaction();
-
     }
 }
