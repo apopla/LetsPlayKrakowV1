@@ -22,7 +22,7 @@
         android:padding="16sp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@android:color/black"
-        tools:text="Kościół Papieża Polaka" />
+        tools:text="Kosciol Papieza Polaka" />
 
     <TextView
         android:id="@+id/place_description"
@@ -33,14 +33,14 @@
         android:paddingLeft="16sp"
         android:textSize="10sp"
         android:layout_marginBottom="12dp"
-        tools:text="najlepsze kremówki na Kazimierzu" />
+        tools:text="najlepsze kremowki na Kazimierzu" />
 
     <ImageView
         android:id="@+id/place_play_krakow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/menu_places"
-        android:layout_alignParentRight="true"
+        android:src="@drawable/rozek"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
 
     <View

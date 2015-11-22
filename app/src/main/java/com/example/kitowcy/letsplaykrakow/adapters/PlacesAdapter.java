@@ -2,6 +2,7 @@ package com.example.kitowcy.letsplaykrakow.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.example.kitowcy.letsplaykrakow.R;
 import com.example.kitowcy.letsplaykrakow.data.Place;
 import com.example.kitowcy.letsplaykrakow.entities.activities.PlaceActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +90,10 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.VH> {
         viewHolder.name.setText(place.getName());
         String shortDescription = place.getDescription().substring(0, Math.min(place.getDescription().length(), 100));
         viewHolder.description.setText(shortDescription + "...");
-        viewHolder.image.setImageResource(place.getImageResourceId());
+        Picasso.with(context).load(place.getImageResourceId()).into(viewHolder.image);
+
+//        viewHolder.itemView.setBackgroundColor(position % 2 == 0 ?
+//                context.getResources().getColor(R.color.colorPrimary100) : context.getResources().getColor(R.color.colorPrimary200));
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @SuppressWarnings("unchecked generics")
             @Override
@@ -123,6 +128,8 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.VH> {
             description = (TextView) itemView.findViewById(R.id.place_description);
             image = (ImageView) itemView.findViewById(R.id.place_image);
             letsPlayCracow = (ImageView) itemView.findViewById(R.id.place_play_krakow);
+//            description.setTextColor(Color.WHITE);
+//            name.setTextColor(Color.WHITE);
         }
     }
 }

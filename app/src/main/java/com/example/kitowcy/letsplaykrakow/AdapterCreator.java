@@ -46,7 +46,7 @@ public class AdapterCreator {
                         switchTo(context, FragmentUnit.PLACES);
                         break;
                     case 3:
-                        switchTo(context, FragmentUnit.ACHIEVEMENTS);
+                        switchTo(context, FragmentUnit.RECYCLER);
                         break;
                 }
                 if (drawer != null)

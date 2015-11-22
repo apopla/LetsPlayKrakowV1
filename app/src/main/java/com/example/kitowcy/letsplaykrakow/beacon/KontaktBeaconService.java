@@ -4,9 +4,13 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.util.Log;
 import android.view.View;
 
+import com.example.kitowcy.letsplaykrakow.data.Place;
+import com.example.kitowcy.letsplaykrakow.entities.activities.PlaceActivity;
 import com.kontakt.sdk.android.ble.configuration.ActivityCheckConfiguration;
 import com.kontakt.sdk.android.ble.configuration.ForceScanConfiguration;
 import com.kontakt.sdk.android.ble.configuration.ScanPeriod;
@@ -25,6 +29,9 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * Created by Arek on 21.11.2015.
@@ -157,6 +164,21 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
                     Log.d(TAG, "Beacon ranging: major: " + beaconDevice.getMajor());
                     Log.d(TAG, "Beacon ranging: minor: " + beaconDevice.getMinor());
                     Log.d(TAG, "Beacon ranging: unique id: " + beaconDevice.getUniqueId());
+                    Realm realm = Realm.getInstance(getApplicationContext());
+                    Place place = realm.where(Place.class).equalTo("UUID", beaconDevice.getUniqueId()).findFirst();
+                    if(!place.isSeen()) {
+                        realm.beginTransaction();
+                        place.setIsSeen(true);
+                        realm.copyToRealmOrUpdate(place);
+                        realm.commitTransaction();
+                        Intent intent = new Intent(getApplicationContext(), PlaceActivity.class);
+                        intent.putExtra("NAME", place.getName());
+                        intent.putExtra("DESCRIPTION", place.getDescription());
+                        intent.putExtra("IMAGE_RES", place.getImageResourceId());
+                        intent.putExtra("PLAY", place.isLetsPlayKrakow());
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getApplicationContext().startActivity(intent);
+                    }
                 }
             }
             break;

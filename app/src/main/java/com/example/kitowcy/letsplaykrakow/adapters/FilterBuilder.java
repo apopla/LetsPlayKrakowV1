@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * Created by lukasz on 21.11.15.
  */
-public   class FilterBuilder {
+public class FilterBuilder {
     public static final int FOOD = 0;
     public static final int CULTURE = 1;
     public static final int ENTERTAINMENT = 2;
@@ -29,6 +29,11 @@ public   class FilterBuilder {
     public FilterBuilder with(Integer type) {
         if (type == 0 || type == 1 || type == 2 || type == 3)
             filterList.add(type);
+        return this;
+    }
+
+    public FilterBuilder clear() {
+        filterList.clear();
         return this;
     }
 

@@ -1,6 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.kitowcy.letsplaykrakow.entities.DisplayPlaceActivity">
-
+    tools:context="com.example.kitowcy.letsplaykrakow.entities.activities.PlaceActivity">
+    <item
+        android:id="@+id/filterPlaces"
+        android:orderInCategory="100"
+        android:title="Filter places "
+        app:showAsAction="never" />
 </menu>

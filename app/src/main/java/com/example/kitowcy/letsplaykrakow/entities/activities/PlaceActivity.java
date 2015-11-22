@@ -1,6 +1,8 @@
 package com.example.kitowcy.letsplaykrakow.entities.activities;
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -37,7 +39,15 @@ public class PlaceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate ");
         setContentView(R.layout.activity_display_place);
-
+        ActionBar ab = getActionBar();
+        if (ab != null) {
+            Log.d(TAG, "editing actionbar!");
+            ab.setHomeButtonEnabled(true);
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setHomeButtonEnabled(true);
+        } else {
+            Log.d(TAG, "actionbar is null :(");
+        }
         injectViews();
 
         Intent intent = getIntent();
@@ -52,7 +62,12 @@ public class PlaceActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
-            getSupportActionBar().setTitle(name);
+        }
+        if(collapsingToolbarLayout!=null){
+            collapsingToolbarLayout.setTitle(name);
+            collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
+            collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
+
         }
     }
 
@@ -66,23 +81,18 @@ public class PlaceActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_display_place, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

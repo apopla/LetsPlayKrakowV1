@@ -12,13 +12,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.example.kitowcy.letsplaykrakow.Constants;
 import com.example.kitowcy.letsplaykrakow.R;
+import com.example.kitowcy.letsplaykrakow.adapters.FilterDialogBuilder;
+import com.example.kitowcy.letsplaykrakow.adapters.FilterBuilder;
 import com.example.kitowcy.letsplaykrakow.data.Place;
+import com.example.kitowcy.letsplaykrakow.entities.MainActivity;
 import com.example.kitowcy.letsplaykrakow.location.LocationData;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,6 +34,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -39,6 +48,8 @@ public class GoogleMapFragment extends Fragment {
 
     private boolean locationFound = false;
     private RelativeLayout mapLayout;
+    private FilterBuilder currentFilter;
+    public static GoogleMapFragment instance;
 
     public static GoogleMapFragment newInstance() {
         GoogleMapFragment fragment = new GoogleMapFragment();
@@ -54,6 +65,9 @@ public class GoogleMapFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate ");
+        MainActivity.currentFragmentDisplayedId = Constants.MAP;
+        instance = this;
+        currentFilter = new FilterBuilder().withAll();
         getActivity().setTitle("Krakow Places Map");
     }
 
@@ -68,6 +82,21 @@ public class GoogleMapFragment extends Fragment {
 
     private void getViews(View view) {
         mapLayout = (RelativeLayout) view.findViewById(R.id.map_layout);
+    }
+
+    public void setupFilterDialog() {
+        FilterDialogBuilder.build(getActivity(), currentFilter, new FilterDialogBuilder.OnRefreshListener() {
+            @Override
+            public void onRefresh(FilterBuilder currentFilter) {
+                redrawMarkers();
+            }
+        });
+    }
+
+    private void redrawMarkers() {
+        Log.d(TAG, "redrawMarkers ");
+        drawMarkers(map);
+        updateMarker(LocationData.getCurrentPosition());
     }
 
     @Override
@@ -163,18 +192,26 @@ public class GoogleMapFragment extends Fragment {
         RealmResults<Place> places = realm.where(Place.class).findAll();
         if (places != null) {
             map.clear();
-
+            List<Place> dataSet = new ArrayList<>();
             for (Place place : places) {
+                if (place.getCategory().equals("CULTURE") && currentFilter.contains(FilterBuilder.CULTURE))
+                    dataSet.add(place);
+                if (place.getCategory().equals("FOOD") && currentFilter.contains(FilterBuilder.FOOD))
+                    dataSet.add(place);
+                if (place.getCategory().equals("MONUMENTS") && currentFilter.contains(FilterBuilder.MONUMENTS))
+                    dataSet.add(place);
+                if (place.getCategory().equals("ENTERTAINMENT") && currentFilter.contains(FilterBuilder.ENTERTAINMENT))
+                    dataSet.add(place);
+            }
+
+            for (Place place : dataSet) {
                 Log.d(TAG, "draw new Marker: " + place.getName());
 //                Marker m =
                 map.addMarker(new MarkerOptions()
                         .position(new LatLng(place.getLatitude(), place.getLongitude()))
-                        .title(place.getDescription())
-                        .snippet(place.getName())
-                        .icon(BitmapDescriptorFactory
-                                .fromResource(getCategorizedResource(place.getCategory()))
-
-                        ));
+                        .title(place.getName())
+                        .snippet(place.getAddress())
+                        .icon(BitmapDescriptorFactory.fromResource(getCategorizedResource(place.getCategory()))));
             }
         }
     }
@@ -191,7 +228,6 @@ public class GoogleMapFragment extends Fragment {
             return R.drawable.marker_culture;
         else
             return R.drawable.marker_monuments;
-
     }
 
     @Override
@@ -202,13 +238,42 @@ public class GoogleMapFragment extends Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_map, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.filter) {
+            setupFilterDialog();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        instance = this;
+    }
+
+    @Override
     public void onStop() {
+        instance = null;
         Log.d(TAG, "onStop()");
         super.onStop();
     }
 
     @Override
     public void onDetach() {
+        instance = null;
         super.onDetach();
         Log.d(TAG, "onDetach ");
         LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(locationUpdateReceiver);
