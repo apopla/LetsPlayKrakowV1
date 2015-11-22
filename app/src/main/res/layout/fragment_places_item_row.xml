@@ -30,7 +30,8 @@
         android:layout_below="@+id/place_name"
         android:layout_toRightOf="@+id/place_image"
         android:paddingLeft="16sp"
-        android:textSize="18sp"
+        android:textSize="10sp"
+        android:layout_marginBottom="12dp"
         tools:text="najlepsze kremówki na Kazimierzu" />
 
     <ImageView
@@ -40,5 +41,10 @@
         android:src="@drawable/menu_places"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_alignTop="@+id/place_image"/>
 
 </RelativeLayout>
