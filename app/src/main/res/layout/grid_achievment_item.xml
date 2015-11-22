@@ -1,29 +1,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="5dp" >
+    android:padding="5dp">
 
-    <ImageView
+    <!--<ImageView-->
+    <!--android:id="@+id/item_image"-->
+    <!--android:layout_width="80dp"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_height="80dp"-->
+    <!--android:layout_marginRight="10dp"-->
+    <!--android:src="@drawable/kolanko1" >-->
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/item_image"
         android:layout_width="80dp"
-        android:layout_centerHorizontal="true"
         android:layout_height="80dp"
-        android:layout_marginRight="10dp"
-        android:src="@drawable/kolanko1" >
-    </ImageView>
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/kolanko1"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="2dp" />
+
 
     <TextView
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/item_image"
-        android:paddingBottom="2sp"
-        android:text="text"
         android:id="@+id/item_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/item_image"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
-        android:textSize="15sp" >
-    </TextView>
+        android:paddingBottom="2sp"
+        android:text="text"
+        android:textSize="15sp"/>
 
 </RelativeLayout>
