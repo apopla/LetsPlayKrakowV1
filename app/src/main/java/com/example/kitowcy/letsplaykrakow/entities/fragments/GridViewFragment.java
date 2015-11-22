@@ -56,17 +56,15 @@ public class GridViewFragment extends Fragment {
                 RealmResults<Place> realmResults = realm.where(Place.class).findAll();
                 for (Place place : realmResults) {
                     //// FIXME: 22.11.15
-                    boolean isUnlocked = place.isLetsPlayKrakow();
-                    int resource = isUnlocked ? place.getImageResourceId() : 0;
-                    gridArray.add(new Pair<>(place.getImageResourceId(), place.getName()));
+                    boolean isUnlocked = place.isSeen();
+                    int resource = isUnlocked ? place.getImageResourceId() : place.getBlockedImageRecourceId();
+                    gridArray.add(new Pair<>(resource, place.getName()));
                 }
             }
         });
 
         gridView = (GridView) view.findViewById(R.id.achievements_grid_view);
-
         customGridAdapter = new CustomGridViewAdapter(getActivity(), R.layout.grid_achievment_item, gridArray);
-
         gridView.setAdapter(customGridAdapter);
         return view;
     }
