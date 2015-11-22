@@ -38,21 +38,21 @@ public class TapPointEventBroadcastReceiver extends BroadcastReceiver {
         if (Triggers.ACTION_TRIGGERS_DETECTED.equals(intent.getAction())) {
             ArrayList<Trigger> triggers = intent.getParcelableArrayListExtra(Triggers.EXTRA_DETECTED_TRIGGERS);
 
-            Log.d(TAG, "Trigger json: " + triggers.get(0).getTriggerPayload());
-            Log.d(TAG, "Trigger id: " + triggers.get(0).getTriggerId());
-            Log.d(TAG, "Received " + triggers.size() + " events.");
+            for(Trigger trigger: triggers) {
+                Log.d(TAG, "Trigger json: " + trigger.getTriggerPayload());
+                Log.d(TAG, "Trigger id: " + trigger.getTriggerId());
+                Log.d(TAG, "Received " + triggers.size() + " events.");
 
-            try {
-                KontaktEvent event = Deserializer.deserialize(context, triggers.get(0).getTriggerPayload());
-                if (event.getType().equals(EVENT_BEACON_TYPE)) {
-                    showNotification(context, event);
+                try {
+                    KontaktEvent event = Deserializer.deserialize(context, triggers.get(0).getTriggerPayload());
+                    if (event.getType().equals(EVENT_BEACON_TYPE)) {
+                        showNotification(context, event);
+                    } else if (event.getType().equals(VALID_BEACON_TYPE)) {
+                        FilterDialogBuilder.buildNotification(context);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-
-                else if (event.getType().equals(VALID_BEACON_TYPE)) {
-                    FilterDialogBuilder.buildNotification(context);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
         }
     }
