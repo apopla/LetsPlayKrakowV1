@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.kitowcy.letsplaykrakow.R;
 import com.example.kitowcy.letsplaykrakow.data.Place;
 import com.example.kitowcy.letsplaykrakow.entities.activities.PlaceActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +89,8 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.VH> {
         viewHolder.name.setText(place.getName());
         String shortDescription = place.getDescription().substring(0, Math.min(place.getDescription().length(), 100));
         viewHolder.description.setText(shortDescription + "...");
-        viewHolder.image.setImageResource(place.getImageResourceId());
+        Picasso.with(context).load(place.getImageResourceId()).into(viewHolder.image);
+      //  viewHolder.image.setImageResource(place.getImageResourceId());
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @SuppressWarnings("unchecked generics")
             @Override

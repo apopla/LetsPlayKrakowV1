@@ -1,6 +1,7 @@
 package com.example.kitowcy.letsplaykrakow.entities.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -52,7 +53,12 @@ public class PlaceActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
-            getSupportActionBar().setTitle(name);
+        }
+        if(collapsingToolbarLayout!=null){
+            collapsingToolbarLayout.setTitle(name);
+            collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
+            collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
+
         }
     }
 
