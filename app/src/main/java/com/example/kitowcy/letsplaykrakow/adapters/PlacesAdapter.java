@@ -90,7 +90,10 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.VH> {
         viewHolder.name.setText(place.getName());
         String shortDescription = place.getDescription().substring(0, Math.min(place.getDescription().length(), 100));
         viewHolder.description.setText(shortDescription + "...");
-        viewHolder.image.setImageResource(place.getImageResourceId());
+        Picasso.with(context).load(place.getImageResourceId()).into(viewHolder.image);
+
+        viewHolder.itemView.setBackgroundColor(position % 2 == 0 ?
+                context.getResources().getColor(R.color.colorPrimary400): context.getResources().getColor(R.color.colorPrimary600));
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @SuppressWarnings("unchecked generics")
             @Override

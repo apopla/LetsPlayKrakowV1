@@ -72,6 +72,18 @@ public class PlaceCreator {
         staraSynagogaPlace.setLongitude(staraSynagogaLng);
         staraSynagogaPlace.setLetsPlayKrakow(true);
 
+        Place pierozkiPlace = realm.createObject(Place.class);
+        pierozkiPlace.setUUID(UUID.randomUUID().toString());
+        pierozkiPlace.setName(staraSynagogaName);
+        pierozkiPlace.setCategory(context.getResources().getString(R.string.monument_category));
+        pierozkiPlace.setImageResourceId(R.drawable.synagoga);
+        pierozkiPlace.setDescription(staraSynagogaDescription);
+        pierozkiPlace.setAddress(staraSynagogaAddress);
+        pierozkiPlace.setLatitude(staraSynagogaLat);
+        pierozkiPlace.setLongitude(staraSynagogaLng);
+        pierozkiPlace.setLetsPlayKrakow(false);
+
+
         realm.commitTransaction();
 
 
