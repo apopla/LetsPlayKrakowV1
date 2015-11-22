@@ -1,6 +1,10 @@
 package com.example.kitowcy.letsplaykrakow.beacon;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -172,17 +176,37 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
                         place.setIsSeen(true);
                         realm.copyToRealmOrUpdate(place);
                         realm.commitTransaction();
-                        Intent intent = new Intent(getApplicationContext(), PlaceActivity.class);
-                        intent.putExtra("NAME", place.getName());
-                        intent.putExtra("DESCRIPTION", place.getDescription());
-                        intent.putExtra("IMAGE_RES", place.getImageResourceId());
-                        intent.putExtra("PLAY", place.isLetsPlayKrakow());
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        getApplicationContext().startActivity(intent);
+
+                        showNotification(place);
                     }
                 }
             }
             break;
         }
     }
+
+    public void showNotification(Place place) {
+        Intent intent = new Intent(getApplicationContext(), PlaceActivity.class);
+        intent.putExtra("NAME", place.getName());
+        intent.putExtra("DESCRIPTION", place.getDescription());
+        intent.putExtra("IMAGE_RES", place.getImageResourceId());
+        intent.putExtra("PLAY", place.isLetsPlayKrakow());
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivities(this, 0,
+                new Intent[] { intent }, PendingIntent.FLAG_UPDATE_CURRENT);
+        Notification notification = new Notification.Builder(this)
+                .setSmallIcon(android.R.drawable.ic_dialog_info)
+                .setContentTitle("You reach " + place.getName() + "!")
+                .setContentText(place.getDescription())
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .build();
+        notification.defaults |= Notification.DEFAULT_SOUND;
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, notification);
+    }
+
 }
