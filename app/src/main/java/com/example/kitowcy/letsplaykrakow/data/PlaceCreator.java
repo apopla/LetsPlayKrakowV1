@@ -7,6 +7,7 @@ import com.example.kitowcy.letsplaykrakow.R;
 import java.util.UUID;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 
 /**
  * Created by lukasz on 21.11.15.
@@ -90,10 +91,36 @@ public class PlaceCreator {
         Double pauliteLat = 50.048140;
         Double pauliteLng = 19.937664;
 
+        Double swGertrudyLat = 50.056258;
+        Double swGertrudyLng = 19.944772;
+        Double wawelLat = 50.054222;
+        Double wawelLng = 19.939532;
+        Double stradomLat = 50.051900;
+        Double stradomLng = 19.941174;
+        Double placWolnicaLat = 50.048490;
+        Double placWolnicaLng = 19.943148;
+        Double koronaLat = 50.044007;
+        Double koronaLng = 19.946771;
+        Double smolkiLat = 50.041344;
+        Double smolkiLng = 19.942858;
+        Double pocztaLat = 50.059812;
+        Double pocztaLng = 19.942115;
+        Double starowislnaLat = 50.057023;
+        Double starowislnaLng = 19.944518;
+        Double miodowaLat = 50.053764;
+        Double miodowaLng = 19.947941;
+        Double wawrzyncaLat = 50.050937;
+        Double wawrzyncaLng = 19.951009;
+        Double bohaterowLat = 50.046762;
+        Double bohaterowLng = 19.954689;
+
 
         Realm realm = Realm.getInstance(context);
         realm.beginTransaction();
         realm.where(Place.class).findAll().clear();
+        realm.where(Line.class).findAll().clear();
+        realm.where(Stop.class).findAll().clear();
+
         Place alchemiaPlace = realm.createObject(Place.class);
         alchemiaPlace.setUUID("Sgwx");
         alchemiaPlace.setIsSeen(false);
@@ -262,10 +289,100 @@ public class PlaceCreator {
         isaacPlace.setLongitude(isaacLng);
         isaacPlace.setLetsPlayKrakow(true);
 
+        Line firstLine = realm.createObject(Line.class);
+        firstLine.setName(8);
+        RealmList<Stop> firstStops = new RealmList<>();
 
+        Stop swGertrudyStop = realm.createObject(Stop.class);
+        swGertrudyStop.setUuid(UUID.randomUUID().toString());
+        swGertrudyStop.setName("Sw. Gertrudy");
+        swGertrudyStop.setLatitude(swGertrudyLat);
+        swGertrudyStop.setLongitude(swGertrudyLng);
+        Stop wawelStop = realm.createObject(Stop.class);
+        wawelStop.setUuid(UUID.randomUUID().toString());
+
+        wawelStop.setName("Wawel");
+        wawelStop.setLatitude(wawelLat);
+        wawelStop.setLongitude(wawelLng);
+        Stop stradomStop = realm.createObject(Stop.class);
+        stradomStop.setUuid(UUID.randomUUID().toString());
+
+        stradomStop.setName("Stradom");
+        stradomStop.setLatitude(stradomLat);
+        stradomStop.setLongitude(stradomLng);
+        Stop wolnicaStop = realm.createObject(Stop.class);
+        wolnicaStop.setUuid(UUID.randomUUID().toString());
+
+        wolnicaStop.setName("Plac Wolnica");
+        wolnicaStop.setLatitude(placWolnicaLat);
+        wolnicaStop.setLongitude(placWolnicaLng);
+
+        Stop koronaStop = realm.createObject(Stop.class);
+        koronaStop.setUuid(UUID.randomUUID().toString());
+
+        koronaStop.setName("Korona");
+        koronaStop.setLatitude(koronaLat);
+        koronaStop.setLongitude(koronaLng);
+
+        Stop smolkiStop = realm.createObject(Stop.class);
+        smolkiStop.setUuid(UUID.randomUUID().toString());
+        smolkiStop.setName("Smolki");
+        smolkiStop.setLatitude(smolkiLat);
+        smolkiStop.setLongitude(smolkiLng);
+        realm.commitTransaction();
+        realm.beginTransaction();
+        firstStops.add(swGertrudyStop);
+        firstStops.add(wawelStop);
+        firstStops.add(stradomStop);
+        firstStops.add(wolnicaStop);
+        firstStops.add(koronaStop);
+        firstStops.add(smolkiStop);
+        firstLine.setStops(firstStops);
         realm.commitTransaction();
 
+        realm.beginTransaction();
+        Line secondLine = realm.createObject(Line.class);
+        secondLine.setName(24);
+        RealmList<Stop> secondStops = new RealmList<>();
 
+        Stop pocztaStop = realm.createObject(Stop.class);
+        pocztaStop.setUuid(UUID.randomUUID().toString());
+        pocztaStop.setName("Poczta Glowna");
+        pocztaStop.setLatitude(pocztaLat);
+        pocztaStop.setLongitude(pocztaLng);
 
+        Stop starowislnaStop = realm.createObject(Stop.class);
+        starowislnaStop.setUuid(UUID.randomUUID().toString());
+        starowislnaStop.setName("Starowislna");
+        starowislnaStop.setLatitude(starowislnaLat);
+        starowislnaStop.setLongitude(starowislnaLng);
+
+        Stop miodowaStop = realm.createObject(Stop.class);
+        miodowaStop.setUuid(UUID.randomUUID().toString());
+        miodowaStop.setName("Miodowa");
+        miodowaStop.setLatitude(miodowaLat);
+        miodowaStop.setLongitude(miodowaLng);
+
+        Stop wawrzyncaStop = realm.createObject(Stop.class);
+        wawrzyncaStop.setUuid(UUID.randomUUID().toString());
+        wawrzyncaStop.setName("Sw. Wawrzynca");
+        wawrzyncaStop.setLatitude(wawrzyncaLat);
+        wawrzyncaStop.setLongitude(wawrzyncaLng);
+
+        Stop bohaterowStop = realm.createObject(Stop.class);
+        bohaterowStop.setUuid(UUID.randomUUID().toString());
+        bohaterowStop.setName("Plac bohaterow getta");
+        bohaterowStop.setLatitude(bohaterowLat);
+        bohaterowStop.setLongitude(bohaterowLng);
+
+        realm.commitTransaction();
+        realm.beginTransaction();
+        secondStops.add(pocztaStop);
+        secondStops.add(starowislnaStop);
+        secondStops.add(miodowaStop);
+        secondStops.add(wawrzyncaStop);
+        secondStops.add(bohaterowStop);
+        secondLine.setStops(secondStops);
+        realm.commitTransaction();
     }
 }

@@ -13,6 +13,7 @@ import android.support.v4.util.Pair;
 import android.util.Log;
 import android.view.View;
 
+import com.example.kitowcy.letsplaykrakow.R;
 import com.example.kitowcy.letsplaykrakow.data.Place;
 import com.example.kitowcy.letsplaykrakow.entities.activities.PlaceActivity;
 import com.kontakt.sdk.android.ble.configuration.ActivityCheckConfiguration;
@@ -193,20 +194,20 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
             intent.putExtra("PLAY", place.isLetsPlayKrakow());
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            PendingIntent pendingIntent = PendingIntent.getActivities(this, 0,
-                    new Intent[] { intent }, PendingIntent.FLAG_UPDATE_CURRENT);
-            Notification notification = new Notification.Builder(this)
-                    .setSmallIcon(android.R.drawable.ic_dialog_info)
-                    .setContentTitle("You reach " + place.getName() + "!")
-                    .setContentText(place.getDescription())
-                    .setAutoCancel(true)
-                    .setContentIntent(pendingIntent)
-                    .build();
-            notification.defaults |= Notification.DEFAULT_SOUND;
-            NotificationManager notificationManager =
-                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.notify(1, notification);
-        }
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivities(this, 0,
+                new Intent[] { intent }, PendingIntent.FLAG_UPDATE_CURRENT);
+        Notification notification = new Notification.Builder(this)
+                .setSmallIcon(R.drawable.bekon)
+                .setContentTitle("You reach " + place.getName() + "!")
+                .setContentText(place.getDescription())
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .build();
+        notification.defaults |= Notification.DEFAULT_SOUND;
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, notification);
+    }
 
 }

@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         PlaceCreator.load(this);
 
+
         setContentView(R.layout.activity_main_material);
         setupDrawer();
 
