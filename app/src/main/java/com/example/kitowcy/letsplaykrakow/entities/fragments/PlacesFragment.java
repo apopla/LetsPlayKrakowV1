@@ -45,7 +45,7 @@ public class PlacesFragment extends Fragment {
 
         FilterBuilder filterBuilder = new FilterBuilder();
         filterBuilder.withAll();
-        placesAdapter = new PlacesAdapter(getActivity(), filterBuilder);
+        placesAdapter = new PlacesAdapter(parentActivity, filterBuilder);
         recyclerView.setAdapter(placesAdapter);
         return view;
     }
