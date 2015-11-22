@@ -178,7 +178,7 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
                         realm.copyToRealmOrUpdate(place);
                         realm.commitTransaction();
 
-                        showNotification(place);
+//                        showNotification(place);
                     }
                 }
             }
@@ -186,13 +186,13 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
         }
     }
 
-    public void showNotification(Place place) {
-        Intent intent = new Intent(getApplicationContext(), PlaceActivity.class);
-        intent.putExtra("NAME", place.getName());
-        intent.putExtra("DESCRIPTION", place.getDescription());
-        intent.putExtra("IMAGE_RES", place.getImageResourceId());
-        intent.putExtra("PLAY", place.isLetsPlayKrakow());
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        public void showNotification(Place place) {
+            Intent intent = new Intent(getApplicationContext(), PlaceActivity.class);
+            intent.putExtra("NAME", place.getName());
+            intent.putExtra("DESCRIPTION", place.getDescription());
+            intent.putExtra("IMAGE_RES", place.getImageResourceId());
+            intent.putExtra("PLAY", place.isLetsPlayKrakow());
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivities(this, 0,
