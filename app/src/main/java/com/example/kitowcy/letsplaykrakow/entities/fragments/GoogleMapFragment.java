@@ -1,13 +1,10 @@
 package com.example.kitowcy.letsplaykrakow.entities.fragments;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,15 +15,13 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.example.kitowcy.letsplaykrakow.Constants;
 import com.example.kitowcy.letsplaykrakow.R;
+import com.example.kitowcy.letsplaykrakow.adapters.FilterDialogBuilder;
 import com.example.kitowcy.letsplaykrakow.adapters.FilterBuilder;
 import com.example.kitowcy.letsplaykrakow.data.Place;
 import com.example.kitowcy.letsplaykrakow.entities.MainActivity;
@@ -90,49 +85,12 @@ public class GoogleMapFragment extends Fragment {
     }
 
     public void setupFilterDialog() {
-        final Dialog dialog = new Dialog(getActivity());
-        dialog.setTitle("Filter places");
-
-        dialog.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE);
-        //this makes cardView look
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.setContentView(R.layout.filter_dialog);
-
-        final CheckBox food = (CheckBox) dialog.findViewById(R.id.FOOD);
-        final CheckBox fun = (CheckBox) dialog.findViewById(R.id.entertainment);
-        final CheckBox monument = (CheckBox) dialog.findViewById(R.id.monuments);
-        final CheckBox culture = (CheckBox) dialog.findViewById(R.id.culture);
-
-        food.setChecked(currentFilter.contains(FilterBuilder.FOOD));
-        fun.setChecked(currentFilter.contains(FilterBuilder.ENTERTAINMENT));
-        culture.setChecked(currentFilter.contains(FilterBuilder.CULTURE));
-        monument.setChecked(currentFilter.contains(FilterBuilder.MONUMENTS));
-
-        final TextView applyChangesButton = (TextView) dialog.findViewById(R.id.apply);
-        applyChangesButton.setOnTouchListener(new View.OnTouchListener() {
+        FilterDialogBuilder.build(getActivity(), currentFilter, new FilterDialogBuilder.OnRefreshListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                applyChangesButton.setTextColor(getResources().getColor(R.color.colorPrimary));
-                return false;
-            }
-        });
-        applyChangesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                currentFilter.clear();
-                if (food.isChecked())
-                    currentFilter.with(FilterBuilder.FOOD);
-                if (fun.isChecked())
-                    currentFilter.with(FilterBuilder.ENTERTAINMENT);
-                if (monument.isChecked())
-                    currentFilter.with(FilterBuilder.MONUMENTS);
-                if (culture.isChecked())
-                    currentFilter.with(FilterBuilder.CULTURE);
+            public void onRefresh(FilterBuilder currentFilter) {
                 redrawMarkers();
-                dialog.dismiss();
             }
         });
-        dialog.show();
     }
 
     private void redrawMarkers() {

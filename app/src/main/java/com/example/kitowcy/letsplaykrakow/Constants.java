@@ -16,5 +16,6 @@ public class Constants {
     public static final String LOCATION_UPDATE_KEY = "LOCATION";
 
     public static final int MAP = 2000;
+    public static final int PLACES = 1000;
 
 }
