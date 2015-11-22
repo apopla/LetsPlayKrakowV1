@@ -26,7 +26,8 @@ public class FragmentSwitcher {
      * @param placeHolderResource - placeholder for fragments
      * @param bundle
      */
-    public static void switchToFragment(AppCompatActivity activity, FragmentUnit fragmentUnit, int placeHolderResource, Bundle bundle) {
+    public static void switchToFragment(AppCompatActivity activity, FragmentUnit fragmentUnit,
+                                        int placeHolderResource, Bundle bundle) {
         Log.d(TAG, "Switching to fragment: " + fragmentUnit.getFragmentClass().getSimpleName());
 
         if (activity.getApplicationContext() != null) {

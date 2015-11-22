@@ -29,6 +29,7 @@ import com.kontakt.sdk.android.ble.filter.ibeacon.IBeaconFilter;
 import com.kontakt.sdk.android.ble.filter.ibeacon.IBeaconFilters;
 import com.kontakt.sdk.android.ble.manager.ProximityManager;
 import com.kontakt.sdk.android.common.profile.IBeaconDevice;
+import com.proxama.tappoint.auth.Authentication;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -48,8 +49,8 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
     private static final String AREK_BLACK_BEACON_UNIQUE_UUID = "Sgwx";
     private static final String AREK_WHITE_BEACON_UNIQUE_UUID = "cIKQ";
 
-    private static final int BEACON_MONITORING_TIME = 5;
-    private static final int BEACON_RANGING_TIME = 3;
+    private static final int BEACON_MONITORING_TIME = 3;
+    private static final int BEACON_RANGING_TIME = 2;
 
     private ProximityManager beaconManager;
     private List<IBeaconFilter> filteredBeaconList;
@@ -162,8 +163,6 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
 
         switch(event.getEventType()) {
 
-            case DEVICE_DISCOVERED:
-
             case DEVICES_UPDATE: {
 
                 for (IBeaconDevice beaconDevice : iBeaconDeviceEvent.getDeviceList()) {
@@ -184,8 +183,6 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
                 }
             }
             break;
-
-
         }
     }
 

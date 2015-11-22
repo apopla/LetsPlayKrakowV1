@@ -25,6 +25,7 @@ import com.example.kitowcy.letsplaykrakow.FragmentSwitcher;
 import com.example.kitowcy.letsplaykrakow.FragmentUnit;
 import com.example.kitowcy.letsplaykrakow.MaterialDrawerAdapter;
 import com.example.kitowcy.letsplaykrakow.R;
+import com.example.kitowcy.letsplaykrakow.tappoint.TapPointService;
 import com.example.kitowcy.letsplaykrakow.beacon.KontaktBeaconService;
 import com.example.kitowcy.letsplaykrakow.data.PlaceCreator;
 import com.example.kitowcy.letsplaykrakow.entities.fragments.GoogleMapFragment;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         PlaceCreator.load(this);
 
+
         setContentView(R.layout.activity_main_material);
         setupDrawer();
 
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         showSplashFragment();
         setupLocationService();
         startBeaconService();
+        startTapPointService();
     }
 
     private void setupLocationService() {
@@ -150,6 +153,13 @@ public class MainActivity extends AppCompatActivity {
         startService(intent);
     }
 
+    private void startTapPointService() {
+        Log.d(TAG, "startTapPointService() called with: " + "");
+
+        Intent intent = new Intent(this, TapPointService.class);
+        startService(intent);
+    }
+
     private void setupDrawer() {
         Log.d(TAG, "setupDrawer()");
 
@@ -215,12 +225,13 @@ public class MainActivity extends AppCompatActivity {
             if (currentFragmentDisplayedId == Constants.MAP) {
                 if (GoogleMapFragment.instance != null)
                     GoogleMapFragment.instance.setupFilterDialog();
-            }else if(currentFragmentDisplayedId == Constants.PLACES) {
+            } else if (currentFragmentDisplayedId == Constants.PLACES) {
                 if (PlacesFragment.instance != null)
                     PlacesFragment.instance.setupFilterDialog();
             }
-                return true;
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

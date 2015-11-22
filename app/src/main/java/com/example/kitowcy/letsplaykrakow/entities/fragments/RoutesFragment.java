@@ -12,8 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.kitowcy.letsplaykrakow.R;
-import com.example.kitowcy.letsplaykrakow.adapters.CustomGridViewAdapter;
-import com.example.kitowcy.letsplaykrakow.data.Place;
+import com.example.kitowcy.letsplaykrakow.entities.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +24,8 @@ public class RoutesFragment extends Fragment {
 
     private static final String TAG = RoutesFragment.class.getSimpleName();
 
+    private RelativeLayout layoutOsemka;
+    private MainActivity parentActivity;
     private RelativeLayout layoutOsemka, layoutDwadziescia;
 
     public static RoutesFragment newInstance() {
@@ -49,12 +50,16 @@ public class RoutesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_routes, container, false);
 
         layoutOsemka = (RelativeLayout) view.findViewById(R.id.layout_osemka);
-        layoutDwadziescia = (RelativeLayout) view.findViewById(R.id.layout_dwadziescia);
 
         layoutOsemka.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(getActivity(), "Osemeczka jedzie", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Osemeczka jedzie", Toast.LENGTH_SHORT).show();
+
+                parentActivity.getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.activity_main_fragment_placeholder,
+                                GoogleMapFragment.newInstance(8))
+                        .commitAllowingStateLoss();
             }
         });
 
@@ -64,6 +69,7 @@ public class RoutesFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        parentActivity = (MainActivity) activity;
     }
 
     @Override
