@@ -216,7 +216,7 @@ public class GoogleMapFragment extends Fragment {
 
     private void drawBusStops() {
         Realm realm = Realm.getInstance(getActivity());
-        Line line = realm.where(Line.class).equalTo("name",8).findFirst();
+        Line line = realm.where(Line.class).equalTo("name",lineNumber).findFirst();
 
         //todo: drawing stops goes here
         RealmResults<Place> nearbyPlaces = realm.where(Place.class).findAll();
