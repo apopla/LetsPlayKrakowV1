@@ -48,9 +48,12 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
 
     private static final String AREK_BLACK_BEACON_UNIQUE_UUID = "Sgwx";
     private static final String AREK_WHITE_BEACON_UNIQUE_UUID = "cIKQ";
+    private static final String BEACON_TRAM = "ElKv";
 
     private static final int BEACON_MONITORING_TIME = 3;
     private static final int BEACON_RANGING_TIME = 2;
+
+    private boolean isNotificationShown = false;
 
     private ProximityManager beaconManager;
     private List<IBeaconFilter> filteredBeaconList;
@@ -102,6 +105,7 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
         filteredBeaconList = new ArrayList<>();
         filteredBeaconList.add(IBeaconFilters.newUniqueIdFilter(AREK_BLACK_BEACON_UNIQUE_UUID));
         filteredBeaconList.add(IBeaconFilters.newUniqueIdFilter(AREK_WHITE_BEACON_UNIQUE_UUID));
+        filteredBeaconList.add(IBeaconFilters.newUniqueIdFilter(BEACON_TRAM));
     }
 
     private void initializeIBeaconScanContext() {
@@ -170,23 +174,44 @@ public class KontaktBeaconService extends Service implements ProximityManager.Pr
                     Log.d(TAG, "Beacon ranging: major: " + beaconDevice.getMajor());
                     Log.d(TAG, "Beacon ranging: minor: " + beaconDevice.getMinor());
                     Log.d(TAG, "Beacon ranging: unique id: " + beaconDevice.getUniqueId());
-                    Realm realm = Realm.getInstance(getApplicationContext());
-                    Place place = realm.where(Place.class).equalTo("UUID", beaconDevice.getUniqueId()).findFirst();
-                    if(!place.isSeen()) {
-                        realm.beginTransaction();
-                        place.setIsSeen(true);
-                        realm.copyToRealmOrUpdate(place);
-                        realm.commitTransaction();
+
+                    if (beaconDevice.getUniqueId().equals(BEACON_TRAM)) {
+                        if (!isNotificationShown) {
+                            showTramNotification();
+                            isNotificationShown = true;
+                        }
+                    }
+//                    Realm realm = Realm.getInstance(getApplicationContext());
+//                    Place place = realm.where(Place.class).equalTo("UUID", beaconDevice.getUniqueId()).findFirst();
+//                    if(!place.isSeen()) {
+//                        realm.beginTransaction();
+//                        place.setIsSeen(true);
+//                        realm.copyToRealmOrUpdate(place);
+//                        realm.commitTransaction();
 
 //                        showNotification(place);
-                    }
+//                   }
                 }
             }
             break;
         }
     }
 
-        public void showNotification(Place place) {
+    private void showTramNotification() {
+
+        Notification notification = new Notification.Builder(this)
+                .setSmallIcon(R.drawable.bekon)
+                .setContentTitle("Get off the bus on the next station !")
+                .setContentText("2 places are near you !")
+                .setAutoCancel(true)
+                .build();
+        notification.defaults |= Notification.DEFAULT_SOUND;
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(2, notification);
+    }
+
+    public void showNotification(Place place) {
             Intent intent = new Intent(getApplicationContext(), PlaceActivity.class);
             intent.putExtra("NAME", place.getName());
             intent.putExtra("DESCRIPTION", place.getDescription());

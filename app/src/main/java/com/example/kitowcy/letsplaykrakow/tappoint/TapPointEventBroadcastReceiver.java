@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.example.kitowcy.letsplaykrakow.R;
+import com.example.kitowcy.letsplaykrakow.adapters.FilterDialogBuilder;
 import com.example.kitowcy.letsplaykrakow.connection.Deserializer;
 import com.example.kitowcy.letsplaykrakow.connection.KontaktEvent;
 import com.example.kitowcy.letsplaykrakow.data.Place;
@@ -48,7 +49,7 @@ public class TapPointEventBroadcastReceiver extends BroadcastReceiver {
                 }
 
                 else if (event.getType().equals(VALID_BEACON_TYPE)) {
-                    
+                    FilterDialogBuilder.buildNotification(context);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

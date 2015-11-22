@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.kitowcy.letsplaykrakow.R;
+import com.example.kitowcy.letsplaykrakow.entities.MainActivity;
 
 /**
  * Created by lukasz on 22.11.15.
@@ -20,8 +21,8 @@ public class FilterDialogBuilder {
         void onRefresh(FilterBuilder currentFilter);
     }
     public static void buildNotification(Context context){
-        final Dialog dialog = new Dialog(context);
-        dialog.setTitle("Filter places");
+        final Dialog dialog = new Dialog(MainActivity.getInstance());
+//        dialog.setTitle("Filter places");
 
         dialog.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE);
         //this makes cardView look
