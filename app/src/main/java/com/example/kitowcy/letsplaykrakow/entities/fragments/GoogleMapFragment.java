@@ -172,7 +172,7 @@ public class GoogleMapFragment extends Fragment {
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 17));
 //            map.animateCamera(zoom);
             map.addMarker(new MarkerOptions()
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.walking_man))
                     .position(LocationData.getCurrentPosition())
                     .title("My Location"));
             locationFound = true;
