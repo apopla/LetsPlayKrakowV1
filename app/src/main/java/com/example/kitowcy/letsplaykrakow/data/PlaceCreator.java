@@ -95,7 +95,7 @@ public class PlaceCreator {
         realm.beginTransaction();
         realm.where(Place.class).findAll().clear();
         Place alchemiaPlace = realm.createObject(Place.class);
-        alchemiaPlace.setUUID(UUID.randomUUID().toString());
+        alchemiaPlace.setUUID("Sgwx");
         alchemiaPlace.setName(alchemiaName);
         alchemiaPlace.setCategory(context.getResources().getString(R.string.fun_category));
         alchemiaPlace.setImageResourceId(R.drawable.alchemia);
@@ -117,7 +117,7 @@ public class PlaceCreator {
         kolankoPlace.setLetsPlayKrakow(false);
 
         Place staraSynagogaPlace = realm.createObject(Place.class);
-        staraSynagogaPlace.setUUID(UUID.randomUUID().toString());
+        staraSynagogaPlace.setUUID("cIKQ");
         staraSynagogaPlace.setName(staraSynagogaName);
         staraSynagogaPlace.setCategory(context.getResources().getString(R.string.monument_category));
         staraSynagogaPlace.setImageResourceId(R.drawable.synagoga);
