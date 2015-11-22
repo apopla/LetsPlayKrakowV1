@@ -86,7 +86,8 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.VH> {
         final Place place = dataSet.get(position);
         viewHolder.letsPlayCracow.setVisibility(place.isLetsPlayKrakow() ? View.VISIBLE : View.GONE);
         viewHolder.name.setText(place.getName());
-        viewHolder.description.setText(place.getDescription());
+        String shortDescription = place.getDescription().substring(0, Math.min(place.getDescription().length(), 100));
+        viewHolder.description.setText(shortDescription + "...");
         viewHolder.image.setImageResource(place.getImageResourceId());
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @SuppressWarnings("unchecked generics")

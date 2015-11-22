@@ -119,7 +119,7 @@ public class GoogleMapFragment extends Fragment {
 
         //move camera (if location found for the first time)
         if (!locationFound) {
-            map.clear();
+
             CameraUpdate update = CameraUpdateFactory.newLatLng(position);
             map.moveCamera(update);
 //            CameraUpdate zoom = CameraUpdateFactory.zoomTo(5);
@@ -162,19 +162,36 @@ public class GoogleMapFragment extends Fragment {
         Realm realm = Realm.getInstance(getActivity());
         RealmResults<Place> places = realm.where(Place.class).findAll();
         if (places != null) {
-         map.clear();
+            map.clear();
 
             for (Place place : places) {
                 Log.d(TAG, "draw new Marker: " + place.getName());
 //                Marker m =
-                        map.addMarker(new MarkerOptions()
-                                .position(new LatLng(place.getLatitude(), place.getLongitude()))
-                                .title(place.getDescription())
-                                .snippet(place.getAddress())
-                                .icon(BitmapDescriptorFactory
-                                        .fromResource(place.getImageResourceId())));
+                map.addMarker(new MarkerOptions()
+                        .position(new LatLng(place.getLatitude(), place.getLongitude()))
+                        .title(place.getDescription())
+                        .snippet(place.getName())
+                        .icon(BitmapDescriptorFactory
+                                .fromResource(getCategorizedResource(place.getCategory()))
+
+                        ));
             }
         }
+    }
+
+    private int getCategorizedResource(String category) {
+
+        if (category.equals("FOOD"))
+            return R.drawable.marker_food;
+        else if (category.equals("ENTERTAINMENT"))
+            return R.drawable.marker_fun;
+        else if (category.equals("CULTURE"))
+            return R.drawable.marker_culture;
+        else if (category.equals("CULTURE"))
+            return R.drawable.marker_culture;
+        else
+            return R.drawable.marker_monuments;
+
     }
 
     @Override
