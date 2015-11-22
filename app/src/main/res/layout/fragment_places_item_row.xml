@@ -10,6 +10,7 @@
         android:id="@+id/place_image"
         android:layout_width="100sp"
         android:layout_height="100sp"
+        android:scaleType="centerCrop"
         android:layout_centerVertical="true"
         android:src="@color/colorAccent" />
 
@@ -41,10 +42,12 @@
         android:src="@drawable/menu_places"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
     <View
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:layout_alignTop="@+id/place_image"/>
+        android:background="@color/colorPrimaryDark"
+        android:layout_alignTop="@+id/place_image"
+        android:layout_toEndOf="@+id/place_image" />
 
 </RelativeLayout>
