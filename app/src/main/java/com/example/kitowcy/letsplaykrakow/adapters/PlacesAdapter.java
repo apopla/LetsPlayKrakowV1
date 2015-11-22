@@ -2,6 +2,7 @@ package com.example.kitowcy.letsplaykrakow.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
@@ -89,8 +90,7 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.VH> {
         viewHolder.name.setText(place.getName());
         String shortDescription = place.getDescription().substring(0, Math.min(place.getDescription().length(), 100));
         viewHolder.description.setText(shortDescription + "...");
-        Picasso.with(context).load(place.getImageResourceId()).into(viewHolder.image);
-      //  viewHolder.image.setImageResource(place.getImageResourceId());
+        viewHolder.image.setImageResource(place.getImageResourceId());
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @SuppressWarnings("unchecked generics")
             @Override
