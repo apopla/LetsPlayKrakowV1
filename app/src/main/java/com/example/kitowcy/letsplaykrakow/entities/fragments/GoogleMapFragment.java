@@ -49,10 +49,20 @@ public class GoogleMapFragment extends Fragment {
     private boolean locationFound = false;
     private RelativeLayout mapLayout;
     private FilterBuilder currentFilter;
+    private int lineNumber;
     public static GoogleMapFragment instance;
+    private boolean isRouteView = false;
 
     public static GoogleMapFragment newInstance() {
         GoogleMapFragment fragment = new GoogleMapFragment();
+        return fragment;
+    }
+
+    public static GoogleMapFragment newInstance(int line) {
+        GoogleMapFragment fragment = new GoogleMapFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("LINE", line);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -67,7 +77,14 @@ public class GoogleMapFragment extends Fragment {
         Log.d(TAG, "onCreate ");
         MainActivity.currentFragmentDisplayedId = Constants.MAP;
         instance = this;
-        currentFilter = new FilterBuilder().withAll();
+        if (getArguments() != null) {
+            lineNumber = getArguments().getInt("LINE");
+            currentFilter = new FilterBuilder();
+            isRouteView = true;
+        } else {
+            currentFilter = new FilterBuilder().withAll();
+            isRouteView = false;
+        }
         getActivity().setTitle("Krakow Places Map");
     }
 
@@ -173,18 +190,71 @@ public class GoogleMapFragment extends Fragment {
         showProgressBar(true);
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         map = mapFragment.getMap();
-        mapFragment.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap googleMap) {
-                Log.v(TAG, "setupMap() : onMapReady()");
+        mapFragment.getMapAsync(
+                new OnMapReadyCallback() {
+                    @Override
+                    public void onMapReady(GoogleMap googleMap) {
+                        Log.v(TAG, "setupMap() : onMapReady()");
 
-                LocalBroadcastManager.getInstance(getActivity()).registerReceiver(locationUpdateReceiver,
-                        new IntentFilter(Constants.LOCATION_UPDATE_BROADCAST));
-                drawMarkers(map);
-                updateMarker(LocationData.getCurrentPosition());
-            }
-        });
+                        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(locationUpdateReceiver,
+                                new IntentFilter(Constants.LOCATION_UPDATE_BROADCAST));
+                        if (isRouteView)
+                            drawBusStops();
+                        else {
+                            drawMarkers(map);
+                        }
+                        updateMarker(LocationData.getCurrentPosition());
+                    }
+                }
+
+        );
+
         showProgressBar(false);
+    }
+
+    private void drawBusStops() {
+        Realm realm = Realm.getInstance(getActivity());
+//        Line line = realm.where(Line.class).equalTo("name",8).findFirst();
+
+        //todo: drawing stops goes here
+        RealmResults<Place> nearbyPlaces = realm.where(Place.class).findAll();
+
+//        for(Stop stop : stops){
+//
+//            map.addMarker(new MarkerOptions()
+//                    .position(new LatLng(stop.getLatitude(), stop.getLongitude()))
+//                    .title(place.getName())
+//                    .snippet(place.getAddress())
+//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.blue_bus_stop)));
+//            for (LatLng latLng : getNearbyPlaces(nearbyPlaces,stop.getPosition)) {
+//
+//                map.addMarker(new MarkerOptions()
+//                        .position(new LatLng(place.getLatitude(), place.getLongitude()))
+//                        .title(place.getName())
+//                        .snippet(place.getAddress())
+//                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.blue_bus_stop)));
+//            }
+//        }
+    }
+
+    private List<Place> getNearbyPlaces(RealmResults<Place> places, LatLng selectedStop) {
+        List<Place> nearbyPlaces = new ArrayList<>();
+        for (Place p : places) {
+            if (isNearby(new LatLng(p.getLatitude(), p.getLongitude()), selectedStop))
+                nearbyPlaces.add(p);
+        }
+
+        return nearbyPlaces;
+    }
+
+    private boolean isNearby(LatLng p, LatLng selectedStop) {
+
+        double dx = p.latitude - selectedStop.latitude;
+        double dy = p.longitude - selectedStop.longitude;
+        double length = Math.sqrt(dx * dx + dy * dy);
+        boolean isNear = length < 0.0005;
+        Log.d(TAG, "this poi is " + length + " far. " + (isNear ? "It is close" : "Too far"));
+        return isNear;
     }
 
     private void drawMarkers(GoogleMap map) {
